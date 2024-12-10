@@ -20,7 +20,10 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Khula', ...defaultTheme.fontFamily.sans],
-				serif: ['Playfair Display', ...defaultTheme.fontFamily.serif]
+        serif: ['Playfair Display', ...defaultTheme.fontFamily.serif],
+      },
+      colors: {
+        'avocado': '#00221D'      
       },
     },
   },
