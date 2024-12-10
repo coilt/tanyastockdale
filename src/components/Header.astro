@@ -1,0 +1,28 @@
+---
+import {Image} from "astro:assets"
+---
+
+<header
+  class="flex justify-between items-center px-8 py-2 absolute top-0 left-0 right-0 w-full"
+>
+
+<a href="/" class="flex items-center gap-x-4">
+<img
+src="/images/ts_logo.svg"
+width={160}
+height={60}
+alt="heartbeat icon"
+class="object-cover"
+/>
+ 
+</a>
+<ul class="flex gap-x-8 rounded-full bg-teal-950 px-8 py-2">
+  <li><a href="/" class="text-orange-100 font-bold">Home</a></li>
+  <li><a href="/about" class="text-orange-100">About</a></li>
+  <li><a href="/blog" class="text-orange-100">Contact</a></li>
+</ul>
+
+<ul class="flex gap-x-8 rounded-full bg-teal-950 px-8 py-2">
+  <li><a href="/articles" class="text-orange-100">Articles</a></li>
+</ul>
+</header>

@@ -1,11 +1,39 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import '@fontsource/playfair-display/700.css';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import '../styles/global.css';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
+ 
+<Header />
+ 
+<html>
+  <head>
+    <!-- Your head content -->
+  </head>
+  <body>
+    <div class="bg">
+    <div class="bg-slate-800 w-4/6 max-w-[800px] min-w-[300px] mx-auto min-h-screen bg-opacity-0">
+			
+			
+			<div>
+			<Hero />
+		</div>
+			
+			
+    </div>
+  </body>
+</html>
 
-<Layout>
-	<Welcome />
-</Layout>
+<style>
+  .bg {
+    background-image: url('/images/index-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+  }
+</style>
