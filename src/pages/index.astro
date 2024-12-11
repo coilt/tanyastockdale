@@ -21,7 +21,7 @@ import Testimonials from '@/components/Testimonials.vue';
   </head>
   <body>
     <div class="bg">
-    <div class="bg-slate-800 w-4/6 max-w-[800px] min-w-[300px] mx-auto min-h-screen bg-opacity-0">
+    <div class="bg-slate-200 w-4/6 max-w-[800px] min-w-[300px] mx-auto min-h-screen bg-opacity-0">
 			
 			
 			<div>
@@ -33,7 +33,7 @@ import Testimonials from '@/components/Testimonials.vue';
     </div>
 		<Newsletter client:load id="newsletter-animation" />
 		<Testimonials client:load />
-    <Footer / >
+    <Footer /> 
 
 
   </body>
@@ -82,7 +82,7 @@ import Testimonials from '@/components/Testimonials.vue';
         ease: 'power3.inOut',
         scrollTrigger: {
           trigger: newsletter,
-          start: 'top bottom-=30',
+          start: 'top bottom-=100',
           end: 'top center',
           toggleActions: 'play none none reverse',
 					markers: false
