@@ -93,3 +93,50 @@ h1 {
   margin: 0;
   line-height: 2rem;
 }
+
+
+
+
+.burger {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: rgb(136 165 191 / 48%) 6px 2px 16px 0px, rgb(255 255 255 / 80%) -6px -2px 16px 0px;
+  ;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  transition: all .5s ease;
+  margin: 1em;
+}
+.burger:hover {
+  background: #00221D;
+}
+.burger-strip {
+  transition: all .5s ease;
+}
+.strip div {
+  height: 3px;
+  border-radius: 2px;
+  background: #00221D;
+  margin: 8px;
+  transition: all .55s cubic-bezier(0.075, 0.82, 0.165, 1);
+  width: 32px;
+}
+.burger:hover .strip div {
+  background: white;
+}
+ 
+/* BURGER 2 */
+.burger:hover .burger-strip-2 div:first-child {
+  transform: translateY(12px) rotate(45deg);
+}
+.burger:hover .burger-strip-2 div:nth-child(2) {
+  opacity: 0;
+}
+.burger:hover .burger-strip-2 div:last-child {
+  transform: translateY(-10px) rotate(-45deg);
+}
