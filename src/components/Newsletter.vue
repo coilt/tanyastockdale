@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white py-16 sm:py-24 lg:py-32">
+  <div class="bg-white py-16 sm:py-24 lg:py-32 rounded-t-xxl">
     <div
       class="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-8 lg:px-8"
     >
@@ -16,7 +16,7 @@
             name="email"
             type="email"
             autocomplete="email"
-            required=""
+            required="true"
             class="min-w-0 flex-auto rounded-md bg-white px-3.5 py-2 text-base text-avocado ring-1 ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-teal-800 transition-colors duration-300 ease-in-out sm:text-sm/6"
             placeholder="Enter your email"
           />
