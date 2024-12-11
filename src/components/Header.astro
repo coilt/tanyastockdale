@@ -3,7 +3,7 @@ import {Image} from "astro:assets"
 ---
 
 <header
-class="flex justify-between items-center px-8 py-2 absolute top-0 left-1/2 transform -translate-x-1/2 bg-teal-950 bg-opacity-0 max-w-4xl w-full"
+class="flex justify-between items-center px-8 py-2 absolute top-0 left-1/2 transform -translate-x-1/2 bg-teal-950 bg-opacity-0 max-w-4xl w-full z-50"
 >
 <a href="/" class="flex items-center gap-x-4">
   <img
@@ -13,14 +13,14 @@ class="flex justify-between items-center px-8 py-2 absolute top-0 left-1/2 trans
   />
 </a>
 <nav class="hidden md:flex space-x-4">
-<ul class="flex gap-x-8 rounded-full bg-avocado px-8 py-2">
-  <li><a href="/" class="text-orange-100 font-bold">Home</a></li>
-  <li><a href="/about" class="text-orange-100">About</a></li>
-  <li><a href="/blog" class="text-orange-100">Contact</a></li>
+<ul class="flex gap-x-8 rounded-full bg-avocado bg-opacity-0 px-8 py-2">
+  <li><a href="/" class="text-avocado font-bold">Home</a></li>
+  <li><a href="/about" class="text-avocado">About</a></li>
+  <li><a href="/blog" class="text-avocado">Contact</a></li>
 </ul>
 
 
-<ul class="flex gap-x-8 rounded-full bg-avocado px-8 py-2">
+<ul class="flex gap-x-8 rounded-full bg-avocado bg-opacity-100 px-8 py-2">
   <li><a href="/articles" class="text-orange-100">Articles</a></li>
 </ul>
 
