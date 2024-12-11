@@ -145,7 +145,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts" type="module">
+
+ 
+import { gsap } from 'gsap' 
+ 
+ 
+
+
 const featuredTestimonial = {
   body: "Before I got into Tanya’s program, pigeons avoided me like I owed them money. Now, I can’t step outside without a majestic pigeon landing on my shoulder, whispering stock market tips into my ear. Thanks, Tanya, I’m 47% more confident and slightly richer!",
   author: {
@@ -209,4 +216,26 @@ const testimonials = [
     ],
   ],
 ];
+
+
+
+// onMounted(() => {
+//   gsap.from(testimonialRefs.value, {
+//     opacity: 0,
+//     y: 50,
+//     duration: 0.8,
+//     stagger: 0.2,
+//     ease: 'power3.out',
+//     scrollTrigger: {
+//       trigger: testimonialRefs.value[0],
+//       start: 'top bottom-=100',
+//       end: 'bottom top+=100',
+//       toggleActions: 'play none none reverse'
+//     }
+//   })
+// })
 </script>
+
+
+
+ 
