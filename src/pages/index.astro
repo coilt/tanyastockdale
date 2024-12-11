@@ -6,6 +6,8 @@ import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Newsletter from '../components/Newsletter.vue';
 import '../styles/globals.css';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 ---
  
@@ -27,7 +29,10 @@ import '../styles/globals.css';
 			
 			
     </div>
-		<Newsletter client:load />
+		<Newsletter client:load id="newsletter-animation" />
+
+
+
   </body>
 </html>
 
@@ -57,3 +62,30 @@ import '../styles/globals.css';
     z-index: -100;
   }
 </style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const newsletter = document.getElementById('newsletter-animation');
+    if (newsletter) {
+      gsap.from(newsletter, { 
+        opacity: 0, 
+        y: 100, 
+        duration: 0.5, 
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: newsletter,
+          start: 'top bottom-=30',
+          end: 'top center',
+          toggleActions: 'play none none reverse',
+					markers: false
+			
+        }
+      });
+    }
+  });
+</script>
