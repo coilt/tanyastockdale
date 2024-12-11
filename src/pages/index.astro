@@ -3,6 +3,7 @@ import '@fontsource/playfair-display/700.css';
 import '@fontsource/quicksand';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import Newsletter from '../components/Newsletter.vue';
 import '../styles/globals.css';
@@ -32,7 +33,7 @@ import Testimonials from '@/components/Testimonials.vue';
     </div>
 		<Newsletter client:load id="newsletter-animation" />
 		<Testimonials client:load />
-
+    <Footer / >
 
 
   </body>
