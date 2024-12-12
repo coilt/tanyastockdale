@@ -79,7 +79,7 @@
 
 
 h1 {
-  font-size: calc(3rem + 2.8vw);
+  font-size: calc(3rem + 2.2vw);
   font-weight: bold;
   color: #0A3728;
   margin-top: 4rem;
@@ -102,17 +102,42 @@ h1 {
   }
 }
 
-.lead {
-  margin-top: 1.4rem;
-  font-size: 1.2rem;
-  font-weight: normal;
-  color: #23322e;   
-  line-height: 1.4rem;
+
+@media (min-width: 2400px) {
+  h1 {
+    font-size: calc(3rem + 1.5vw);
+    line-height: calc(1.5rem + 2.5vw);
+    margin-top: 0rem;
+  }
 }
 
 
+.lead {
+  margin-top: 1.4rem;
+  font-size: calc(1.5rem + 1vw);
+  line-height: calc(1.5rem + 1vw);
+  font-weight: normal;
+  color: #23322e;   
+
+}
 
 
+  @media (min-width: 768px) {
+    .lead {
+      font-size: calc(1rem + 2vw);
+      line-height: calc(1rem + 2vw);
+      margin-top: 2rem;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .lead {
+      font-size: calc(1rem + 1vw);
+      line-height: calc(1rem + 1vw);
+      margin-top: 2rem;
+    }
+  }
+     
 .burger {
   width: 46px;
   height: 46px;
