@@ -1,94 +1,88 @@
 ---
-import '@fontsource/playfair-display/700.css';
-import '@fontsource/quicksand';
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
-import Newsletter from '../components/Newsletter.vue';
-import '../styles/globals.css';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Testimonials from '@/components/Testimonials.vue';
-
+import "@fontsource/playfair-display/700.css";
+import "@fontsource/quicksand";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+import Newsletter from "../components/Newsletter.vue";
+import "../styles/globals.css";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Testimonials from "@/components/Testimonials.vue";
 ---
- 
+
 <Header />
- 
+
 <html>
   <head>
     <!-- Your head content -->
   </head>
   <body>
-    <div class="bg">
-    <div class="bg-slate-200 w-4/6 max-w-[800px] min-w-[300px] mx-auto min-h-screen bg-opacity-0">
-			
-			
-			<div>
-			<Hero />
-		
-		</div>
-			
-			
+    <div class="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"> 
+      <div
+        class="bg-slate-200 w-4/6 max-w-[800px] min-w-[300px] mx-auto min-h-screen bg-opacity-0"
+      >
+        <div>
+          <Hero />
+        </div>
+      </div>
+      <Newsletter client:load id="newsletter-animation" />
+      <Testimonials client:load />
+      <Footer />
     </div>
-		<Newsletter client:load id="newsletter-animation" />
-		<Testimonials client:load />
-    <Footer /> 
-
-
   </body>
-</html>
 
-<style>
-  .bg {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .bg::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/images/index-bg-2.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: blur(15px);
-    z-index: -100;
-  }
-</style>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const newsletter = document.getElementById('newsletter-animation');
-    if (newsletter) {
-      gsap.from(newsletter, { 
-        opacity: 0, 
-        y: 100, 
-        duration: 0.5, 
-        ease: 'power3.inOut',
-        scrollTrigger: {
-          trigger: newsletter,
-          start: 'top bottom-=100',
-          end: 'top center',
-          toggleActions: 'play none none reverse',
-					markers: false
-			
-        }
-      });
+  <style>
+    .bg {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      width: 100%;
+      overflow: hidden;
     }
-  });
-</script>
+
+    .bg::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("/images/index-bg-2.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(0px);
+      z-index: -100;
+    }
+  </style>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const newsletter = document.getElementById("newsletter-animation");
+      if (newsletter) {
+        gsap.from(newsletter, {
+          opacity: 0,
+          y: 100,
+          duration: 0.5,
+          ease: "power3.inOut",
+          scrollTrigger: {
+            trigger: newsletter,
+            start: "top bottom-=100",
+            end: "top center",
+            toggleActions: "play none none reverse",
+            markers: false,
+          },
+        });
+      }
+    });
+  </script>
+</html>
