@@ -1,7 +1,8 @@
 
 
 <template>
-  <div class=" flex items-center  bg-white py-16 sm:py-24 lg:py-32 rounded-xxl">
+  <div class="bg-slate-200 ">
+  <div class=" flex items-center  bg-white py-16 sm:py-24 lg:py-32 rounded-b-xxl">
     <div
       class="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-8 lg:px-8"
     >
@@ -39,4 +40,5 @@
       </form>
     </div>
   </div>
+</div>
 </template>
