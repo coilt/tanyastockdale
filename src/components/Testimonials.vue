@@ -1,7 +1,7 @@
 <template>
   <div class="relative isolate bg-slate-200 pt-24 pb-32 sm:pt-32">
     <div
-      class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl"
+      class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 "
       aria-hidden="true"
     >
       <div
@@ -71,9 +71,12 @@
         <figure
           class="rounded-2xl bg-white ring-1 shadow-lg ring-gray-900/5 sm:col-span-2 xl:col-start-2 xl:row-end-1"
         >
+        
           <blockquote
             class="p-6 text-lg font-semibold tracking-tight text-gray-900 sm:p-12 sm:text-xl/8"
+            
           >
+          <h3 class="featured font-serif">{{ featuredTestimonial.heading }}</h3>
             <p>{{ `“${featuredTestimonial.body}”` }}</p>
           </blockquote>
           <figcaption
@@ -122,6 +125,8 @@
               class="rounded-2xl bg-white p-6 ring-1 shadow-lg ring-gray-900/5"
             >
               <blockquote class="text-gray-900">
+                <h3 class="non-featured font-serif">{{ testimonial.heading }}</h3>
+
                 <p>{{ `“${testimonial.body}”` }}</p>
               </blockquote>
               <figcaption class="mt-6 flex items-center gap-x-4">
@@ -154,10 +159,11 @@ import { gsap } from 'gsap'
 
 
 const featuredTestimonial = {
-  body: "Before I got into Tanya’s program, pigeons avoided me like I owed them money. Now, I can’t step outside without a majestic pigeon landing on my shoulder, whispering stock market tips into my ear. Thanks, Tanya, I’m 47% more confident and slightly richer!",
+  heading: "I can’t thank enough",
+  body: "I can’t thank my Functional Medicine Practitioner, Tanya Stockdale, enough for the incredible transformation she's guided me through over the past three months. From battling constant bloating and uncontrollable cravings to now feeling balanced, energized, and in control of my eating habits, her expertise has been a game-changer.",
   author: {
-    name: "Brenna Goyette",
-    handle: "brennagoyette",
+    name: "Tallulah",
+    handle: "tallulah",
     imageUrl:
       "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80",
   },
@@ -166,6 +172,7 @@ const testimonials = [
   [
     [
       {
+        heading: "Amazing Results",
         body: "I don’t know what kind of sorcery this is, but ever since I got with Tanya’s program, my lasagna has been winning neighborhood bake-offs—despite the fact it’s not baked and technically, I’m using frozen dinners. Highly recommend!",
         author: {
           name: "Leslie Alexander",
@@ -178,6 +185,7 @@ const testimonials = [
     ],
     [
       {
+        heading: "Amazing Results",
         body: "Warning: Tanya’s programs might make you irresistible. My cat, Mr. Reaper, started preparing me breakfast in bed. If you want devotion bordering on obsession, this is for you.",
         author: {
           name: "Lindsay Walton",
@@ -192,6 +200,7 @@ const testimonials = [
   [
     [
       {
+        heading: "Amazing Results",
         body: "No joke, every single person asked me, ‘If I am on Tanya’s program? You’re the ONE.’ Sure, they all turned out to be pyramid scheme recruiters, but still, my calendar is booked solid. ",
         author: {
           name: "Tom Cook",
@@ -204,6 +213,7 @@ const testimonials = [
     ],
     [
       {
+        heading: "Amazing Results",
         body: "I was skeptical at first, but after one week with this program, I can now predict the weather with my elbow and communicate fluently with squirrels. It’s like I’ve ascended to a higher plane of existence. 10/10 would ascend again.",
         author: {
           name: "Leonard Krasner",

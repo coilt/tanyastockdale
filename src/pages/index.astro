@@ -19,15 +19,25 @@ import Testimonials from "@/components/Testimonials.vue";
     <!-- Your head content -->
   </head>
   <body>
-    <div class="absolute top-0 z-[-2] h-screen w-full bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"> 
+    <div
+      class="bg absolute top-0 z-[-2] w-full bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"
+    >
       <div
-        class="bg-slate-200 w-4/6 max-w-[840px] min-w-[300px] mx-auto min-h-screen bg-opacity-0"
+        class="wrapper-div flex flex-col justify-between"
+        style="height: 100vh;"
       >
-        <div>
-          <Hero />
+        <div class="hero-container">
+          <div
+            class="hero w-4/6 max-w-[840px] min-w-[300px] mx-auto bg-opacity-0"
+          >
+            <Hero />
+          </div>
+        </div>
+        <div class="newsletter-container">
+          <Newsletter client:load id="newsletter-animation" />
         </div>
       </div>
-      <Newsletter client:load id="newsletter-animation" />
+
       <Testimonials client:load />
       <Footer />
     </div>
@@ -35,15 +45,41 @@ import Testimonials from "@/components/Testimonials.vue";
 
   <style>
     .bg {
-      position: relative;
-      background-size: cover;
-      background-position: center;
+      position: absolute;
+      background-size: 100% auto;
       background-repeat: no-repeat;
-      min-height: 100vh;
       width: 100%;
-      overflow: hidden;
+      background-image: url("/images/index-bg-3-opt.jpg");
+      background-position: center 50vh;
     }
 
+    @media (max-width: 768px) {
+      .bg {
+				background-position: center 22%;						 
+      }
+    }
+    @media (max-width: 2268px) {
+      .hero {
+        height: 300px;
+      }
+    }
+
+    .wrapper-div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100vh;
+    }
+
+    .hero-container {
+      flex-grow: 1;
+    }
+
+    .newsletter-container {
+      margin-top: auto;
+    }
+
+    /* 
     .bg::before {
       content: "";
       position: absolute;
@@ -51,16 +87,17 @@ import Testimonials from "@/components/Testimonials.vue";
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url("/images/index-bg-2.jpg");
+      background-image: url("/images/index-bg-3.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       filter: blur(0px);
       z-index: -100;
-    }
+    } */
   </style>
 
   <script>
+    import { fade } from "astro:transitions";
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -71,13 +108,15 @@ import Testimonials from "@/components/Testimonials.vue";
       if (newsletter) {
         gsap.from(newsletter, {
           opacity: 0,
-          y: 100,
+          y: 300,
           duration: 0.5,
           ease: "power3.inOut",
           scrollTrigger: {
             trigger: newsletter,
-            start: "top bottom-=100",
-            end: "top center",
+            start: "top 90%", // Adjust this value as needed
+            end: "+=600", // Adjust this value as needed
+            scrub: false, // Smoothly animates between start and end states
+
             toggleActions: "play none none reverse",
             markers: false,
           },

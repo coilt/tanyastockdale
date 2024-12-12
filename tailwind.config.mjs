@@ -24,7 +24,8 @@ export default {
         serif: ['Playfair Display'],
       },
       colors: {
-				'avocado': '#00221D',   
+				'avocado': '#00221D',
+				'pale-sky': '#F1F7F7',   
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
