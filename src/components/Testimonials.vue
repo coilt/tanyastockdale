@@ -73,7 +73,7 @@
         >
         
           <blockquote
-            class="p-6 text-lg font-semibold tracking-tight text-gray-900 sm:p-12 sm:text-xl/8"
+            class="p-6 text-lg tracking-tight text-gray-900 sm:p-12 sm:text-xl/8"
             
           >
           <h3 class="featured font-serif">{{ featuredTestimonial.heading }}</h3>
@@ -226,24 +226,8 @@ const testimonials = [
     ],
   ],
 ];
-
-
-
-// onMounted(() => {
-//   gsap.from(testimonialRefs.value, {
-//     opacity: 0,
-//     y: 50,
-//     duration: 0.8,
-//     stagger: 0.2,
-//     ease: 'power3.out',
-//     scrollTrigger: {
-//       trigger: testimonialRefs.value[0],
-//       start: 'top bottom-=100',
-//       end: 'bottom top+=100',
-//       toggleActions: 'play none none reverse'
-//     }
-//   })
-// })
+ 
+ 
 </script>
 
 
