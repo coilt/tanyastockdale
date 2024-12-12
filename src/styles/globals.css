@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700&display=swap');
+
+
+
+
  
 @layer base {
   :root {
@@ -192,8 +198,7 @@ h1 {
   transform: translateY(-10px) rotate(-45deg);
 }
 
-
-
+ 
 .featured {
   font-size: 1.4rem;
   font-weight: bold;
@@ -208,4 +213,10 @@ h1 {
   color: #c2a345;
   text-transform: uppercase;
   margin-bottom: 1rem;
+}
+
+
+.signature {
+  font-family: 'Khula', sans-serif;
+  font-weight: 600; /* for semibold */
 }
