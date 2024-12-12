@@ -79,11 +79,27 @@
 
 
 h1 {
-  font-size: 6rem;
+  font-size: calc(3rem + 2.8vw);
   font-weight: bold;
-  color: #0A3728;   
-  margin: 0;
-  line-height: 6rem;
+  color: #0A3728;
+  margin-top: 4rem;
+  line-height: calc(3rem + 3vw);
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: calc(3rem + 4vw);
+    line-height: calc(3rem + 4vw);
+    margin-top: 0rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    font-size: calc(2.5rem + 3.5vw);
+    line-height: calc(2.5rem + 3.5vw);
+    margin-top: 0rem;
+  }
 }
 
 .lead {
