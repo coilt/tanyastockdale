@@ -1,4 +1,8 @@
+
+
 <template>
+  <div>
+  <meta charset="UTF-8">
   <div
     class="flex items-center bg-slate-200 py-12 sm:py-12 lg:py-24 rounded-t-xxl"
   >
@@ -40,4 +44,5 @@
       </form>
     </div>
   </div>
+</div>
 </template>
