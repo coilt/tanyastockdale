@@ -1,0 +1,122 @@
+---
+import Header from "@/components/Header.astro";
+import "@fontsource/playfair-display/700.css";
+import "@fontsource/quicksand";
+import "../styles/globals.css";
+import Footer from "@/components/Footer.astro";
+---
+
+<div>
+  <Header currentPath={Astro.url.pathname} />
+
+
+
+</div>
+
+<div class="bg-white px-6 py-32 lg:px-8">
+  <div class="mx-auto max-w-3xl text-base/7 text-gray-700">
+    <h3 class="text-base/7 featured font-serif font-semibold">About me</h3>
+    <h1
+      class="font-serif mt-2 text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-avocado"
+    >
+      My Journey
+    </h1>
+
+    <p class="mt-6 text-xl/8">
+      Hi! I&apos;m Tanya. There was a point in my life when everything fell
+      apart. Literally everything&mdash;everything familiar, everything
+      tangible, everything I thought I could rely on. It felt as if I were
+      walking steadily along, only to have the carpet pulled out from under me
+      mid-step.
+    </p>
+
+    <figure class="mt-16">
+      <img
+        class="aspect-video rounded-xxl object-cover"
+        src="../../public/images/photo_2024-01-13_21-12-49.jpg"
+        alt="Tanya Stockdale's portrait"
+      />
+      <figcaption class="mt-4 flex gap-x-2 text-sm/6 text-gray-500">
+        <svg
+          class="mt-0.5 size-5 flex-none text-gray-300"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+          data-slot="icon"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z"
+            clip-rule="evenodd"></path>
+        </svg>
+        Tanya Stockdale
+      </figcaption>
+    </figure>
+
+    <div class="mt-10 max-w-2xl">
+      <figure class="mt-10 border-l border-emerald-800 pl-9">
+        <blockquote class="font-semibold text-avocado">
+          <p class="mt-6 text-2xl/8 font-serif">
+            That moment marked the beginning of a journey I never
+            expected&mdash;a journey of self-discovery that eventually brought
+            me to a path of serving and helping others. My health was one of the
+            first things to suffer. My adrenals simply couldn&apos;t cope with
+            the overwhelming, unprecedented stress. Mentally and emotionally, I
+            was in complete chaos.
+          </p>
+        </blockquote>
+      </figure>
+
+      <p class="mt-6">
+        I didn&apos;t know what to do, where to turn, or how to even begin
+        building a new life, especially as a middle-aged woman. It didn&apos;t
+        take long for me to realise that blaming others or looking outside
+        myself for solutions was futile.
+      </p>
+      <p class="mt-6">
+        In the midst of it all, the only person who could pull me out of this
+        situation was me. So, I turned to self-help books, and one thing led to
+        another. Slowly, I began to understand something life-changing: our
+        physical health is rarely separate from our mental and emotional states.
+      </p>
+      <p class="mt-6">
+        In fact, it&apos;s often a direct reflection of them. That realisation
+        propelled me into an extraordinary journey—a non-dual spiritual path
+        that eventually led me to Tibetan Buddhism.
+      </p>
+      <p class="mt-6">
+        Meditation, quite literally, saved my life. With that foundation, I was
+        finally able to shift my focus back to my physical body. Functional
+        medicine became my next deep dive because its principles simply made
+        sense to me.
+      </p>
+      <p class="mt-6">
+        Yes, I had learned how crucial mental and emotional well-being is, but I
+        also knew that guessing what my body needed wasn&apos;t enough. Each of
+        us is unique. Our biochemical make-up differs, and without proper
+        screening and diagnostics grounded in science, it&apos;s nearly
+        impossible to truly understand what&apos;s going on inside.
+      </p>
+      <p class="mt-6">
+        When we combine that scientific insight with smart lifestyle choices,
+        mental and emotional resilience, and a spiritual path that brings
+        meaning and joy, something powerful happens. It creates a robust and
+        meaningful roadmap to guide you towards where you want to go—not just in
+        your health, but in your life.
+      </p>
+      <p class="mt-6">
+        Today, I feel so fortunate to share everything I&apos;ve learned, all
+        the expertise I&apos;ve gained through years of study, exploration, and
+        self-discovery, to help others. Helping hundreds of people navigate
+        their own paths has been one of the most rewarding parts of my journey.
+        If you&apos;re reading this, know that no matter where you&apos;re
+        starting from, change is possible. Growth is possible. And a life of
+        vitality, balance, and meaning is within reach.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <Footer />
+</div>
