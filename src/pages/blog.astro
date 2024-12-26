@@ -11,7 +11,7 @@ const posts = await getGhostPosts();
 
 <Header currentPath={Astro.url.pathname} />
 
-<main>
+<main  class="mt-20">
   {
     posts.map((post: GhostPost) => (
       <div class="bg-white py-24 sm:py-16">

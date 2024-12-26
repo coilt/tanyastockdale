@@ -14,3 +14,10 @@
 // }
 
 
+interface GhostPost {
+  title: string;
+  excerpt: string;
+  url: string;
+  published_at: string;
+  // Add any other properties you're using from the Ghost API
+}
