@@ -6,4 +6,10 @@ import tunnel from "astro-tunnel";
 
 export default defineConfig({
   integrations: [tailwind(), vue(), tunnel()],
+ 
 });
+
+
+
+ 
+ 

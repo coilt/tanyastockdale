@@ -1,4 +1,4 @@
-<template>
+c<template>
   <div>
     <meta charset="UTF-8" />
     <div class="relative isolate bg-slate-200 pt-24 pb-32 sm:pt-32">

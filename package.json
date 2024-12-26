@@ -36,6 +36,8 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/nodemailer": "^6.4.17",
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1"
   }
