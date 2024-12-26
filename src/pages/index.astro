@@ -10,12 +10,12 @@ import "../styles/globals.css";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Testimonials from "@/components/Testimonials.vue";
+console.log("Path in index:", Astro.url.pathname);
+
 ---
 
 <Header currentPath={Astro.url.pathname} />
-
-
-
+ 
 
 <html lang="en">
   <head>
@@ -23,7 +23,7 @@ import Testimonials from "@/components/Testimonials.vue";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Tanya Stockdale | Functional Medicine</title>
+    
   </head>
   <body>
     <div
@@ -48,7 +48,7 @@ import Testimonials from "@/components/Testimonials.vue";
       
 
       <script>
-        console.log("Index.astro: About to render Testimonials component");
+        // console.log("Index.astro: About to render Testimonials component");
       </script>
       <Testimonials client:load />
 

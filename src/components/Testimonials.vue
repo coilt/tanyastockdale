@@ -132,7 +132,7 @@ const observer = ref(null);
 onMounted(() => {
   nextTick(() => {
     if (figureRef.value) {
-      console.log("Figure element found:", figureRef.value);
+      // console.log("Figure element found:", figureRef.value);
       observer.value = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting) {

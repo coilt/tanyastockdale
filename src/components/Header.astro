@@ -1,20 +1,29 @@
 ---
 import { Image } from "astro:assets";
-const pageTitle = "Tanya Stockdale | Functional Medicine Practitioner";
-const { currentPath } = Astro.props;
+const currentPath = Astro.url.pathname;
+console.log("Astro URL Pathname:", Astro.url.pathname);
+
+
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
   </head>
   <body>
     <div class="fixed top-0 left-0 right-0 bg-white bg-opacity-80 z-50">
       <header
+      
         class="flex justify-between items-center px-8 py-2 max-w-4xl mx-auto"
       >
+
+      <div class="debug-info text-black bg-white p-2 absolute top-0 left-0">
+        Current Path: {Astro.url.pathname}
+      </div>
+
+
+
         <a href="/" class="flex items-center gap-x-4">
           <img
             src="/images/ts_logo.svg"
@@ -30,29 +39,33 @@ const { currentPath } = Astro.props;
               <a
                 href="/"
                 class={`text-avocado ${currentPath === "/" ? "font-bold border-b-2 border-avocado" : ""}`}
-                >Home</a>
+                >Home</a
+              >
             </li>
             <li>
               <a
                 href="/about"
-                class={`text-avocado ${currentPath === "/about" ? "font-bold border-b-2 border-avocado" : ""}`}
-                >About</a>
+                class={`text-avocado ${Astro.url.pathname.includes("/about") ? "font-bold border-b-2 border-avocado" : ""}`}
+                >About</a
+              >
             </li>
             <li>
               <a
                 href="/blog"
                 class={`text-avocado ${currentPath === "/blog" ? "font-bold border-b-2 border-avocado" : ""}`}
-                >Contact</a>
+                >Contact</a
+              >
             </li>
           </ul>
           <ul
-            class="flex gap-x-8 rounded-full bg-gradient-to-br from-[#002018] via-[#043929] to-[#0A895C] bg-opacity-100 px-8 py-2"
+            class="flex gap-x-8 rounded-full bg-gradient-to-br gradient bg-opacity-100 px-8 py-2"
           >
             <li>
               <a
                 href="/articles"
                 class={`text-orange-100 ${currentPath === "/articles" ? "font-bold border-b-2 border-orange-100" : ""}`}
-                >Articles</a>
+                >Articles</a
+              >
             </li>
           </ul>
         </nav>
