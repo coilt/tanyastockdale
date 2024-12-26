@@ -2,6 +2,9 @@
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/quicksand";
 import "../styles/globals.css";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <html lang="en">
@@ -10,7 +13,7 @@ import "../styles/globals.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-  <title>Tanya Stockdale | Functional Medicine Practitioner</title>
+    <title>Tanya Stockdale | Functional Medicine Practitioner</title>
     <style is:global>
       .box {
         width: 100px;
@@ -18,12 +21,14 @@ import "../styles/globals.css";
         background: black;
       }
     </style>
+    <ClientRouter />
   </head>
-  <body>
-    <slot />
-    <script>
-      import gsap from "gsap";
-      window.gsap = gsap;
-    </script>
+  <body class="flex flex-col min-h-screen">
+    <Header currentPath={Astro.url.pathname} />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+    <script></script>
   </body>
 </html>

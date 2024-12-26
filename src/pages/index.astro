@@ -11,104 +11,88 @@ import Testimonials from "@/components/Testimonials.vue";
 import Lead from "../components/Lead.astro";
 ---
 
-<Header currentPath={Astro.url.pathname} />
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-  </head>
-  <body>
-    <div
-      class="bg absolute top-0 z-[-2] w-full bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"
-    >
+<Layout title="Tanya Stockdale's homepage">
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <meta name="viewport" content="width=device-width" />
+      <meta name="generator" content={Astro.generator} />
+    </head>
+    <body>
       <div
-        class="wrapper-div flex flex-col justify-between"
-        style="height: 100vh;"
+        class="bg top-0 z-[-2] w-full bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"
       >
-        <div class="hero-container">
+        <div class="wrapper-div flex flex-col justify-between">
           <div
             class="hero w-4/6 max-w-[840px] min-w-[300px] mx-auto bg-opacity-0"
           >
             <Hero />
           </div>
         </div>
-        <div class="newsletter-container"></div>
+        <div>
+          <Lead />
+        </div>
+        <Testimonials client:load />
       </div>
+    </body>
+  </html>
+</Layout>
 
-      <Lead />
+<style>
+  .bg {
+    min-height: 100vh;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-image: url("/images/index-bg-3-opt.jpg");
+    background-position: center 50vh;
+  }
 
-      <Testimonials client:load />
+  @media (max-width: 768px) {
+    .bg {
+      background-position: center 22%;
+    }
+  }
+  @media (max-width: 2268px) {
+    .hero {
+      height: 300px;
+    }
+  }
 
-      <Footer />
-    </div>
+  .wrapper-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+  }
+</style>
 
-    <style>
-      .bg {
-        position: absolute;
-        background-size: 100% auto;
-        background-repeat: no-repeat;
-        width: 100%;
-        background-image: url("/images/index-bg-3-opt.jpg");
-        background-position: center 50vh;
-      }
+<script>
+  import { fade } from "astro:transitions";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-      @media (max-width: 768px) {
-        .bg {
-          background-position: center 22%;
-        }
-      }
-      @media (max-width: 2268px) {
-        .hero {
-          height: 300px;
-        }
-      }
+  gsap.registerPlugin(ScrollTrigger);
 
-      .wrapper-div {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 100vh;
-      }
+  document.addEventListener("DOMContentLoaded", () => {
+    const newsletter = document.getElementById("newsletter-animation");
+    if (newsletter) {
+      gsap.from(newsletter, {
+        opacity: 0,
+        y: 300,
+        duration: 0.5,
+        ease: "power3.inOut",
+        scrollTrigger: {
+          trigger: newsletter,
+          start: "top 90%",
+          end: "+=600",
+          scrub: false,
 
-      .hero-container {
-        flex-grow: 1;
-      }
-
-      .newsletter-container {
-        margin-top: auto;
-      }
-    </style>
-
-    <script>
-      import { fade } from "astro:transitions";
-      import { gsap } from "gsap";
-      import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-      gsap.registerPlugin(ScrollTrigger);
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const newsletter = document.getElementById("newsletter-animation");
-        if (newsletter) {
-          gsap.from(newsletter, {
-            opacity: 0,
-            y: 300,
-            duration: 0.5,
-            ease: "power3.inOut",
-            scrollTrigger: {
-              trigger: newsletter,
-              start: "top 90%",
-              end: "+=600",
-              scrub: false,
-
-              toggleActions: "play none none reverse",
-              markers: false,
-            },
-          });
-        }
+          toggleActions: "play none none reverse",
+          markers: false,
+        },
       });
-    </script>
-  </body>
-</html>
+    }
+  });
+</script>
