@@ -7,15 +7,14 @@ import Footer from "../components/Footer.astro";
 import Hero from "../components/Hero.astro";
 import Newsletter from "../components/Newsletter.vue";
 import "../styles/globals.css";
-import { gsap } from 'gsap';
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Testimonials from "@/components/Testimonials.vue";
 console.log("Path in index:", Astro.url.pathname);
-
+import Lead from "../components/Lead.astro";
 ---
 
 <Header currentPath={Astro.url.pathname} />
- 
 
 <html lang="en">
   <head>
@@ -23,7 +22,6 @@ console.log("Path in index:", Astro.url.pathname);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    
   </head>
   <body>
     <div
@@ -40,19 +38,12 @@ console.log("Path in index:", Astro.url.pathname);
             <Hero />
           </div>
         </div>
-        <div class="newsletter-container">
-         
-        </div>
+        <div class="newsletter-container"></div>
       </div>
 
-      
+      <Lead />
 
-      <script>
-        // console.log("Index.astro: About to render Testimonials component");
-      </script>
       <Testimonials client:load />
-
- 
 
       <Footer />
     </div>

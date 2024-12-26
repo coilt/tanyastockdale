@@ -2,13 +2,12 @@
   <div>
     <meta charset="UTF-8" />
     <div class="relative isolate bg-slate-200 pt-24 pb-32 sm:pt-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto text-center">
-      
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto text-center">
           <p
             class="mt-2 text-4xl font-serif tracking-tight text-avocado sm:text-5xl max-w-100"
           >
-            Here is what people I worked with say
+            Here is what my clients say
           </p>
         </div>
 
@@ -26,20 +25,14 @@
                 },
               ]"
             >
-            <blockquote class="p-6 text-lg tracking-tight text-gray-900 sm:p-12 sm:text-xl/8">
-  <h3 class="featured font-serif">
-    {{ formattedTestimonial.heading }}
-  </h3>
-  <div v-html="formatText(featuredTestimonial.body)"></div>
-
-
-
-
-
-
-
-
-</blockquote>
+              <blockquote
+                class="p-6 text-lg tracking-tight text-gray-900 sm:p-12 sm:text-xl/8"
+              >
+                <h3 class="featured font-serif">
+                  {{ formattedTestimonial.heading }}
+                </h3>
+                <div v-html="formatText(featuredTestimonial.body)"></div>
+              </blockquote>
               <figcaption
                 class="flex flex-wrap items-center gap-x-4 gap-y-4 border-t border-gray-900/10 px-6 py-4 sm:flex-nowrap"
               >
@@ -171,16 +164,19 @@ onMounted(() => {
 
 const formattedTestimonial = computed(() => ({
   ...featuredTestimonial,
-  body: formatText(featuredTestimonial.body)
-}))
+  body: formatText(featuredTestimonial.body),
+}));
 
 const formatText = (text) => {
-  const formattedText = text.replace(/\\n\\n/g, '\n\n');
-  return formattedText.split('\n\n').map((paragraph, index) => 
-    `<p class="${index > 0 ? 'mt-4' : ''}">${paragraph}</p>`
-  ).join('');
-}
-
+  const formattedText = text.replace(/\\n\\n/g, "\n\n");
+  return formattedText
+    .split("\n\n")
+    .map(
+      (paragraph, index) =>
+        `<p class="${index > 0 ? "mt-4" : ""}">${paragraph}</p>`,
+    )
+    .join("");
+};
 
 const featuredTestimonial = {
   heading: "Thank you for your unwavering support",
@@ -200,8 +196,7 @@ const testimonials = [
         author: {
           name: "Zoe Edmunds",
           handle: "zoe-edmunds",
-          imageUrl:
-            "/images/zoe.jpg",
+          imageUrl: "/images/zoe.jpg",
         },
       },
     ],
@@ -212,15 +207,13 @@ const testimonials = [
         author: {
           name: "Elina Passarino",
           handle: "elinapassarino",
-          imageUrl:
-            "/images/elina.jpg",
+          imageUrl: "/images/elina.jpg",
         },
       },
       // More testimonials...
     ],
   ],
   [
-
     [
       {
         heading: "I am forever grateful",
@@ -228,8 +221,7 @@ const testimonials = [
         author: {
           name: "Elena",
           handle: "",
-          imageUrl:
-            "/images/helena.jpg",
+          imageUrl: "/images/helena.jpg",
         },
       },
       // More testimonials...

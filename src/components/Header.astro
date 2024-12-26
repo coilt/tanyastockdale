@@ -1,8 +1,6 @@
 ---
 import { Image } from "astro:assets";
 const currentPath = Astro.url.pathname;
-console.log("Astro URL Pathname:", Astro.url.pathname);
-
 
 ---
 
@@ -14,16 +12,8 @@ console.log("Astro URL Pathname:", Astro.url.pathname);
   <body>
     <div class="fixed top-0 left-0 right-0 bg-white bg-opacity-80 z-50">
       <header
-      
         class="flex justify-between items-center px-8 py-2 max-w-4xl mx-auto"
       >
-
-      <div class="debug-info text-black bg-white p-2 absolute top-0 left-0">
-        Current Path: {Astro.url.pathname}
-      </div>
-
-
-
         <a href="/" class="flex items-center gap-x-4">
           <img
             src="/images/ts_logo.svg"
@@ -38,22 +28,22 @@ console.log("Astro URL Pathname:", Astro.url.pathname);
             <li>
               <a
                 href="/"
-                class={`text-avocado ${currentPath === "/" ? "font-bold border-b-2 border-avocado" : ""}`}
+                class={`text-avocado ${Astro.url.pathname === "/" ? "font-bold border-b-2 border-avocado" : ""}`}
                 >Home</a
               >
             </li>
             <li>
               <a
                 href="/about"
-                class={`text-avocado ${Astro.url.pathname.includes("/about") ? "font-bold border-b-2 border-avocado" : ""}`}
+                class={`text-avocado ${Astro.url.pathname === "/about" ? "font-bold border-b-2 border-avocado" : ""}`}
                 >About</a
               >
             </li>
             <li>
               <a
-                href="/blog"
-                class={`text-avocado ${currentPath === "/blog" ? "font-bold border-b-2 border-avocado" : ""}`}
-                >Contact</a
+                href="/contact"
+                class={`text-avocado ${Astro.url.pathname === "/contact" ? "font-bold border-b-2 border-avocado" : ""}`}
+                >Reach out</a
               >
             </li>
           </ul>
@@ -62,11 +52,13 @@ console.log("Astro URL Pathname:", Astro.url.pathname);
           >
             <li>
               <a
-                href="/articles"
-                class={`text-orange-100 ${currentPath === "/articles" ? "font-bold border-b-2 border-orange-100" : ""}`}
+                href="/blog"
+                class={`text-orange-100 ${Astro.url.pathname === "/articles" ? "font-bold border-b-2 border-orange-100" : ""}`}
                 >Articles</a
               >
             </li>
+
+     
           </ul>
         </nav>
 
