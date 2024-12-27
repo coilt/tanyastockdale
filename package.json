@@ -9,8 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@0x21106/splittext": "github:ayhanexe/gsap-class-based-split-text-plugin",
     "@astrojs/react": "^4.1.2",
     "@astrojs/tailwind": "^5.1.4",
+    "@astrojs/ts-plugin": "^1.10.4",
     "@astrojs/vue": "^5.0.3",
     "@fontsource-variable/playfair-display": "^5.1.0",
     "@fontsource/khula": "^5.1.0",
@@ -20,24 +22,30 @@
     "@tryghost/content-api": "^1.11.21",
     "@vueuse/core": "^12.0.0",
     "@vueuse/motion": "^2.2.6",
+    "aos": "^2.3.4",
     "astro": "^5.1.1",
+    "astro-lenis": "^1.0.0",
     "astro-tunnel": "^0.1.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.15.0",
     "gsap": "^3.12.5",
+    "lenis": "^1.1.18",
     "lucide-vue-next": "^0.468.0",
     "motion": "^11.13.5",
     "nodemailer": "^6.9.16",
     "radix-vue": "^1.9.11",
+    "splitting": "^1.1.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^3.4.16",
     "tailwindcss-animate": "^1.0.7",
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/node": "^22.10.2",
     "@types/nodemailer": "^6.4.17",
+    "@types/splitting": "^1.0.6",
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1"
   }

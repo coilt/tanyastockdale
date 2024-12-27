@@ -4,12 +4,14 @@ import vue from "@astrojs/vue";
 import tailwind from "@astrojs/tailwind";
 import tunnel from "astro-tunnel";
 
+import lenis from "astro-lenis";
+
 export default defineConfig({
-  integrations: [tailwind(), vue(), tunnel()],
+  integrations: [
+    tailwind(), 
+    vue(), 
+    tunnel(), 
+    lenis()
+  ],
  
 });
-
-
-
- 
- 

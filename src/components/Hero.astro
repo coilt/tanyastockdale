@@ -1,6 +1,8 @@
 ---
 import "@fontsource/playfair-display";
-import "../styles/globals.css"
+import "../styles/globals.css";
+import Splitting from "splitting";
+import "../styles/components.css";
 ---
 
 <html lang="en">
@@ -9,14 +11,12 @@ import "../styles/globals.css"
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-     </head>
+  </head>
   <body>
     <main>
-      <div class="breathing-container">
-        <h1
-          class="font-serif text-balance text-transparent bg-clip-text gradient"
-        >
-        Discover Proactive Wellness with Functional Medicine
+      <div class="hero-wrapper">
+        <h1 class="hero-title" data-splitting>
+          Discover Proactive Wellness with Functional Medicine
         </h1>
         <p class="lead font-sans-serif text-balance">
           Functional Medicine for Mind, Body, and Soul
@@ -25,3 +25,31 @@ import "../styles/globals.css"
     </main>
   </body>
 </html>
+
+<script>
+  import gsap from "gsap";
+  import Splitting from "splitting";
+
+  Splitting(); // comment this out to view without the lib
+
+  if (document.querySelector(".hero-title")) {
+    gsap.from(".hero-title .char", {
+      filter: "blur(10px)",
+      duration: 0.8,
+      delay: 0.6,
+      opacity: 0,
+      stagger: 0.02,
+      y: 0,
+      ease: "expo1in",
+    });
+  }
+
+  if (document.querySelector(".lead")) {
+    gsap.from(".lead", {
+      duration: 1,
+      delay: 1,
+      opacity: 0,
+      ease: "power2.in",
+    });
+  }
+</script>

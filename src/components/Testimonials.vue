@@ -1,4 +1,5 @@
-c<template>
+c
+<template>
   <div>
     <meta charset="UTF-8" />
     <div class="relative isolate bg-slate-200 pt-24 pb-32 sm:pt-32">
@@ -129,11 +130,8 @@ onMounted(() => {
       observer.value = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting) {
-            console.log("Testimonial entering viewport");
             isVisible.value = true;
-            nextTick(() => {
-              console.log("Visibility updated, triggering re-render");
-            });
+            nextTick(() => {});
           }
         },
         { threshold: 0, rootMargin: "0px 0px -100px 0px" },

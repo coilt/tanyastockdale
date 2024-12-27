@@ -2,26 +2,31 @@
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/quicksand";
 import "../styles/globals.css";
-import Header from "@/components/Header.astro";
+import "aos/dist/aos.css";
+import Splitting from "splitting";
+import "../styles/components.css";
 ---
 
-<div class="bg-white px-6 py-32 lg:px-8">
+<div class="bg-white px-6 py-24 lg:px-8">
   <div class="mx-auto max-w-3xl text-base/7 text-gray-700">
-    <div class="mt-10 max-w-2xl">
-      <figure class="mt-10 border-l border-emerald-800 pl-9">
-        <blockquote class="font-semibold text-avocado">
-          <p class="mt-6 text-2xl/8 font-serif">
-            I’m fine. Really, I am. Just surviving.
-          </p>
-        </blockquote>
-      </figure>
-
-      <figure transition:name="hero-image" transition:animate="fade" class="mt-16">
+    <div class="max-w-2xl">
+      <figure>
         <img
-          class="aspect-video rounded-2xl object-cover"
+          class="fadeup aspect-video rounded-2xl object-cover"
           src="/images/this-is-fine.jpg"
           alt="This is fine"
         />
+      </figure>
+
+      <figure class="mt-10 border-l border-emerald-800 pl-9">
+        <blockquote class="font-semibold text-avocado">
+          <p
+            class="lead-heading mt-6 text-2xl/8 font-serif"
+            data-splitting="words"
+          >
+            I’m fine. Really, I am. Just surviving.
+          </p>
+        </blockquote>
       </figure>
 
       <p class="mt-6">
@@ -51,3 +56,55 @@ import Header from "@/components/Header.astro";
     </div>
   </div>
 </div>
+
+<script>
+  import Splitting from "splitting";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    Splitting();
+    console.log(
+      "Splitting initialized:",
+      document.querySelectorAll(".splitting .word").length,
+    );
+  });
+
+  if (document.querySelector(".lead-heading")) {
+    gsap.from(".lead-heading .word", {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      stagger: 0.1,
+      filter: "blur(60px)",
+      scrollTrigger: {
+        trigger: ".lead-heading",
+        start: "top 90%",
+        end: "bottom 70%",
+        markers: true,
+        scrub: 1,
+        toggleActions: "play none none reverse",
+      },
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.querySelector(".fadeup")) {
+      gsap.from(".fadeup", {
+        opacity: 0,
+        y: 60,
+        duration: 0.6,
+        scrollTrigger: {
+          trigger: ".fadeup",
+          start: "top 90%",
+          end: "bottom 60%",
+          toggleActions: "play none none reverse",
+          markers: false,
+          scrub: 1,
+        },
+      });
+    }
+  });
+</script>

@@ -4,6 +4,7 @@ import "@fontsource/quicksand";
 import "../styles/globals.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import "aos/dist/aos.css";
 ---
 
 <div>
@@ -32,6 +33,7 @@ import Footer from "@/components/Footer.astro";
         class="aspect-video rounded-2xl object-cover"
         src="/images/photo_2024-01-13_21-12-49.jpg"
         alt="Tanya Stockdale's portrait"
+        data-aos="fade-up"
       />
       <figcaption class="mt-4 flex gap-x-2 text-sm/6 text-gray-500">
         <svg
@@ -158,3 +160,9 @@ import Footer from "@/components/Footer.astro";
 </div>
 
 <Footer />
+
+
+<script>
+  import AOS from "aos";
+  AOS.init();
+</script>
