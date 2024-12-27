@@ -15,9 +15,14 @@ import "../styles/components.css";
   <body>
     <main>
       <div class="hero-wrapper">
-        <h1 class="hero-title" data-splitting>
-          Discover Proactive Wellness with Functional Medicine
-        </h1>
+        <div class="title-container">
+          <h1 class="hero-title solid-title" data-splitting>
+            Discover Proactive Wellness with Functional Medicine
+          </h1>
+          <div class="title-overlay"></div>
+        </div>
+        <div></div>
+
         <p class="lead font-sans-serif text-balance">
           Functional Medicine for Mind, Body, and Soul
         </p>
@@ -32,24 +37,28 @@ import "../styles/components.css";
 
   Splitting(); // comment this out to view without the lib
 
-  if (document.querySelector(".hero-title")) {
-    gsap.from(".hero-title .char", {
-      filter: "blur(10px)",
-      duration: 0.8,
-      delay: 0.6,
-      opacity: 0,
-      stagger: 0.02,
-      y: 0,
-      ease: "expo1in",
-    });
-  }
+  const timeline = gsap.timeline();
 
-  if (document.querySelector(".lead")) {
-    gsap.from(".lead", {
-      duration: 1,
-      delay: 1,
-      opacity: 0,
-      ease: "power2.in",
-    });
-  }
+  timeline.from(".hero-title .char", {
+    filter: "blur(10px)",
+    duration: 0.8,
+    delay: 0.6,
+    opacity: 0,
+    stagger: 0.02,
+    y: 0,
+    ease: "expo1in",
+  });
+ 
 </script>
+
+<style>
+  .gradient-title {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+</style>

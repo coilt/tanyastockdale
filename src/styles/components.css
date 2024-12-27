@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 
 .input:focus {
   outline: none;
@@ -44,35 +43,4 @@
   text-base 
   text-gray-900 
   placeholder:text-gray-400;
-}
-
-.hero-wrapper {
-  position: relative;
-}
-
-.hero-wrapper::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: linear-gradient(
-    to bottom right,
-    #002018,
-    #043929,
-    #0a895c,
-    #00231b
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.hero-title {
-  position: relative;
-  z-index: 1;
-  font-family: 'Playfair Display', serif;
-  overflow: hidden;
-  
 }
