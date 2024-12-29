@@ -1,0 +1,131 @@
+---
+import "@fontsource/playfair-display/700.css";
+import "@fontsource/quicksand";
+import "../styles/globals.css";
+import "aos/dist/aos.css";
+import Splitting from "splitting";
+import "../styles/components.css";
+---
+
+<div class="bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2 ring-red-500"
+    >
+      <div class="pin lg:pr-4  ">
+
+      
+   
+        <div
+          class=" relative overflow-hidden rounded-3xl bg-gray-900 px-6 pt-64 pb-9 shadow-2xl sm:px-12 lg:max-w-lg lg:px-8 lg:pb-8 xl:px-10 xl:pb-10"
+        >
+        
+          <img
+            class="absolute inset-0 size-full object-cover"
+            src="../../public/images/this-is-fine.jpg"
+            alt=""
+          />
+
+      
+
+          <div
+            class="absolute top-1/2 left-1/2 -ml-16 -translate-x-1/2 -translate-y-1/2 transform-gpu blur-3xl"
+            aria-hidden="true"
+          >
+           
+          </div>
+        </div>
+
+        <figure class="mt-10 border-l border-emerald-800 pl-9">
+          <blockquote class="font-semibold text-avocado">
+            <p
+              class="lead-heading mt-6 text-4xl font-serif mb-8"
+              data-splitting="words"
+            >
+              I’m fine. Really, I am. Just surviving.
+            </p>
+          </blockquote>
+        </figure>
+
+   
+      </div>
+      <div>
+        <div class="text-base/7 text-gray-700 lg:max-w-lg">
+      
+ 
+          <p class="mt-6">
+            We have been conditioned to believe that being "busy" (read: important)
+            and "productive" (read: worthy) are the ultimate measures of success.
+            But deep down, many of us feel disconnected from our true selves—rushing
+            through life, only to wonder, at the end, if we ever really lived.
+          </p>
+          <p class="mt-6">
+            As a mother of two, I’ve faced some horrific changes that forced me to
+            rediscover my true purpose. It wasn’t easy. I had to grow up quickly and
+            navigate through some of life’s toughest lessons. So I get it. I've been
+            in that place of feeling lost, unsure of how to move forward.
+          </p>
+          <p class="mt-6">
+            Now, my life's mission is to help high-achievers and those who feel at a
+            crossroads reconnect with their body, mind, and spirit. I guide you to
+            rediscover your inner light and tap into your full potential, so you can
+            show up as your most vibrant, unapologetically authentic self.
+          </p>
+          <p class="mt-6 pin-end">
+            Whether you're a curious individual with minor or major health issues,
+            or simply feeling stuck and uncertain, I’m here to help you move through
+            your health challenges and truly thrive—not just survive—creating a life
+            on your terms, full of energy, purpose, and joy.
+          </p>
+        </div>
+        <hr class="pin-end border-gray-100 mt-24">
+      </div>
+    </div>
+
+<script>
+  import Splitting from "splitting";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    Splitting();
+    console.log(
+      "Splitting initialized:",
+      document.querySelectorAll(".splitting .word").length,
+    );
+  });
+
+  if (document.querySelector(".lead-heading")) {
+    gsap.from(".lead-heading .word", {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      stagger: 0.1,
+      filter: "blur(60px)",
+      scrollTrigger: {
+        trigger: ".lead-heading",
+        start: "top 70%",
+        end: "bottom 70%",
+        scrub: 1,
+        toggleActions: "play none none reverse",
+        
+      },
+    });
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".pin",
+      start: "top 20%",
+      endTrigger: ".pin-end",
+      end: ".pin-end 10%",
+      toggleActions: "play none none reverse",
+      markers: false,
+      scrub: 1,
+      pin: true,
+    },
+  });
+</script>

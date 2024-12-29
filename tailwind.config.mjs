@@ -82,12 +82,28 @@ export default {
           from: { height: "var(--radix-collapsible-content-height)" },
           to: { height: 0 },
         },
+
+        blob: {
+          "0%": {
+            transform: "translate(0%, 0%) scale(1)",
+          },
+          "33%": {
+            transform: "translate(10%, -15%) scale(1.1)",
+          },
+          "66%": {
+            transform: "translate(-7%, 7%) scale(1.1)",
+          },
+          "100%": {
+            transform: "translate(0%, 0%) scale(1)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "collapsible-down": "collapsible-down 0.2s ease-in-out",
         "collapsible-up": "collapsible-up 0.2s ease-in-out",
+        blob: "blob 7s infinite",
       },
     },
   },

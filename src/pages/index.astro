@@ -4,8 +4,9 @@ import "@fontsource/quicksand";
 import "../styles/globals.css";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
-import Testimonials from "@/components/Testimonials.vue";
+import Testimonials from "@/components/Testimonials.astro";
 import Lead from "../components/Lead.astro";
+import Lead2 from "../components/Lead2.astro";
 ---
 
 <Layout title="Tanya Stockdale's homepage">
@@ -28,9 +29,10 @@ import Lead from "../components/Lead.astro";
           </div>
         </div>
         <div>
-          <Lead />
+          <Lead2 />
+          <Testimonials client:load />
         </div>
-        <Testimonials client:load />
+        
       </div>
     </body>
   </html>
@@ -64,5 +66,3 @@ import Lead from "../components/Lead.astro";
     min-height: 100vh;
   }
 </style>
-
- 

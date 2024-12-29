@@ -1,11 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -81,12 +90,10 @@
   }
 }
 
-
 h1 {
   font-size: calc(3rem + 2.2vw);
   font-weight: bold;
-  color: #0A3728;
-  margin-top: 8rem;
+  color: #0a3728;
   line-height: calc(3rem + 3vw);
 }
 
@@ -94,7 +101,6 @@ h1 {
   h1 {
     font-size: calc(3rem + 4vw);
     line-height: calc(3rem + 4vw);
-    margin-top: 10rem;
   }
 }
 
@@ -102,89 +108,81 @@ h1 {
   h1 {
     font-size: calc(2.5rem + 3.5vw);
     line-height: calc(2.5rem + 3.5vw);
-    margin-top: 10rem;
   }
 }
-
-
 
 @media (min-width: 1600px) {
   h1 {
     font-size: calc(2.5rem + 3.5vw);
     line-height: calc(2.5rem + 3.5vw);
-    margin-top: 18rem;
   }
 }
-
 
 @media (min-width: 2400px) {
   h1 {
     font-size: calc(3rem + 1.5vw);
     line-height: calc(1.5rem + 2.5vw);
-    margin-top: 22rem;
   }
 }
-
 
 .lead {
   margin-top: 1.4rem;
   font-size: calc(1.5rem + 1vw);
   line-height: calc(1.5rem + 1vw);
   font-weight: normal;
-  color: #23322e;   
-
+  color: #23322e;
 }
 
+@media (min-width: 768px) {
+  .lead {
+    font-size: calc(1rem + 2vw);
+    line-height: calc(1rem + 2vw);
+    margin-top: 2rem;
+  }
+}
 
-  @media (min-width: 768px) {
-    .lead {
-      font-size: calc(1rem + 2vw);
-      line-height: calc(1rem + 2vw);
-      margin-top: 2rem;
-    }
+@media (min-width: 1200px) {
+  .lead {
+    font-size: calc(1rem + 1vw);
+    line-height: calc(1rem + 1vw);
+    margin-top: 2rem;
   }
-  
-  @media (min-width: 1200px) {
-    .lead {
-      font-size: calc(1rem + 1vw);
-      line-height: calc(1rem + 1vw);
-      margin-top: 2rem;
-    }
-  }
-     
+}
+
 .burger {
   width: 46px;
   height: 46px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0);
-  box-shadow: rgb(136 165 191 / 48%) 6px 2px 16px 0px, rgb(255 255 255 / 80%) -6px -2px 16px 0px;
-  ;
+  box-shadow:
+    rgb(136 165 191 / 48%) 6px 2px 16px 0px,
+    rgb(255 255 255 / 80%) -6px -2px 16px 0px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5px;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
   margin: 1em;
 }
 .burger:hover {
-  background: #00221D;
+  background: #00221d;
 }
 .burger-strip {
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 .strip div {
   height: 3px;
   border-radius: 2px;
-  background: #00221D;
+  background: #00221d;
   margin: 8px;
-  transition: all .55s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: all 0.55s cubic-bezier(0.075, 0.82, 0.165, 1);
   width: 32px;
 }
 .burger:hover .strip div {
   background: white;
 }
- 
+
 /* BURGER 2 */
 .burger:hover .burger-strip-2 div:first-child {
   transform: translateY(12px) rotate(45deg);
@@ -196,8 +194,8 @@ h1 {
   transform: translateY(-10px) rotate(-45deg);
 }
 
- 
 .featured {
+  font-family: "Playfair Display";
   font-size: 1.4rem;
   font-weight: bold;
   color: #c2a345;
@@ -206,6 +204,7 @@ h1 {
 }
 
 .non-featured {
+  font-family: "Playfair Display";
   font-size: 1rem;
   font-weight: bold;
   color: #c2a345;
@@ -213,23 +212,36 @@ h1 {
   margin-bottom: 1rem;
 }
 
-
 .signature {
-  font-family: 'Khula', sans-serif;
+  font-family: "Khula", sans-serif;
   font-weight: 600; /* for semibold */
 }
 
-
-
 .gradient {
-  background-image: linear-gradient(to bottom right, #002018, #043929, #0A895C, #00231B);
-
+  background-image: linear-gradient(
+    to bottom right,
+    #002018,
+    #043929,
+    #0a895c,
+    #00231b
+  );
 }
-
-
 
 .hero-wrapper {
   position: relative;
+  margin-top: 20%;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-wrapper {
+    margin-top: 30%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-wrapper {
+    margin-top: 40%;
+  }
 }
 
 .hero-title {
@@ -255,3 +267,7 @@ h1 {
   mix-blend-mode: screen;
 }
 
+textarea {
+  resize: none;
+  overflow: hidden;
+}
