@@ -2,70 +2,68 @@
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/quicksand";
 import "../styles/globals.css";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
 import { getGhostPosts } from "../lib/ghost";
-
+import Layout from "@/layouts/Layout.astro";
 
 const posts = await getGhostPosts();
+console.log(Astro.url);
 ---
 
-<Header currentPath={Astro.url.pathname} />
-
-<main  class="mt-20">
-  {
-    posts.map((post: GhostPost) => (
-      <div class="bg-white py-24 sm:py-16">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-2xl">
-            <article class="flex max-w-xl flex-col items-start justify-between">
-              <div class="flex items-center gap-x-4 text-xs">
-                <time datetime={post.published_at} class="text-gray-500">
-  {new Date(post.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-</time>
-                <a
-                  href="#"
-                  class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                >
-                  Marketing
-                </a>
-              </div>
-              <div class="group relative">
-                <h3 class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
-                  {" "}
-                  <a href={post.url}>{post.title} </a>
-                </h3>
-                <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600">
-                  {post.excerpt}{" "}
-                </p>
-              </div>
-              <div class="relative mt-8 flex items-center gap-x-4">
-                <img
-                  src="/images/photo_2024-01-13_21-12-49.jpg"
-                  alt=""
-                  class="size-10 rounded-full bg-gray-50"
-                />
-                <div class="text-sm/6">
-                  <p class="font-semibold text-gray-900">
-                    <a href="#">
-                      <span class="absolute inset-0" />
-                      Tanya Stockdale
-                    </a>
-                  </p>
-                  <p class="text-gray-600">Functional Medicine Practitioner</p>
+<Layout title="Tanya Stockdale's blog">
+  <main class="mt-20">
+    {
+      posts.map((post: GhostPost) => (
+        <div class="bg-white py-24 sm:py-16">
+          <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl">
+              <article class="flex max-w-xl flex-col items-start justify-between">
+                <div class="flex items-center gap-x-4 text-xs">
+                  <time datetime={post.published_at} class="text-gray-500">
+                    {new Date(post.published_at).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </time>
+                  <a
+                    href="#"
+                    class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+                  >
+                    Marketing
+                  </a>
                 </div>
-              </div>
-            </article>
-
-
-             
-
-
+                <div class="group relative">
+                  <h3 class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
+                    {" "}
+                    <a href={post.url}>{post.title} </a>
+                  </h3>
+                  <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600">
+                    {post.excerpt}{" "}
+                  </p>
+                </div>
+                <div class="relative mt-8 flex items-center gap-x-4">
+                  <img
+                    src="/images/photo_2024-01-13_21-12-49.jpg"
+                    alt=""
+                    class="size-10 rounded-full bg-gray-50"
+                  />
+                  <div class="text-sm/6">
+                    <p class="font-semibold text-gray-900">
+                      <a href="#">
+                        <span class="absolute inset-0" />
+                        Tanya Stockdale
+                      </a>
+                    </p>
+                    <p class="text-gray-600">
+                      Functional Medicine Practitioner
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
-      </div>
-    ))
-  }
-</main>
-
-<Footer />
+      ))
+    }
+  </main>
+</Layout>

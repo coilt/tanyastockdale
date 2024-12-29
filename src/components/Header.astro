@@ -1,93 +1,82 @@
 ---
-  
+const currentPath = Astro.url.pathname;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"  />
-  </head>
-  <body>
-    <div class="fixed top-0 left-0 right-0 bg-white bg-opacity-80 z-50 backdrop-blur-sm">
-      <header
-        class="flex justify-between items-center px-8 py-2 max-w-4xl mx-auto"
+<div
+  class="fixed top-0 left-0 right-0 bg-white bg-opacity-80 z-50 backdrop-blur-sm"
+>
+  <header class="flex justify-between items-center px-8 py-2 max-w-4xl mx-auto">
+    <a href="/" class="flex items-center gap-x-4">
+      <img
+        src="/images/ts_logo.svg"
+        alt="heartbeat icon"
+        class="w-40 h-15 object-contain min-w-[160px] min-h-[60px]"
+      />
+    </a>
+    <nav class="hidden md:flex space-x-4">
+      <ul class="flex gap-x-8 rounded-full bg-avocado bg-opacity-0 px-8 py-2">
+        {
+          ["", "about", "contact"].map((path) => {
+            const isActive =
+              path === ""
+                ? currentPath === "/" || currentPath === ""
+                : currentPath.replace(/\/$/, "") ===
+                  `/${path}`.replace(/\/$/, "");
+            return (
+              <li>
+                <a
+                  href={`/${path}`}
+                  class={`sliding-underline ${isActive ? "active" : "menu-item"}`}
+                >
+                  {path ? path.charAt(0).toUpperCase() + path.slice(1) : "Home"}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <ul
+        class="flex gap-x-8 rounded-full bg-gradient-to-br gradient bg-opacity-100 px-8 py-2"
       >
-        <a href="/" class="flex items-center gap-x-4">
-          <img
-            src="/images/ts_logo.svg"
-            alt="heartbeat icon"
-            class="w-40 h-15 object-contain min-w-[160px] min-h-[60px]"
-          />
-        </a>
-        <nav class="hidden md:flex space-x-4">
-          <ul
-            class="flex gap-x-8 rounded-full bg-avocado bg-opacity-0 px-8 py-2"
+        <li>
+          <a
+            href="/blog"
+            class={`text-orange-100 ${currentPath === "blog" ? "active" : ""}`}
+            >Blog</a
           >
-            <li>
-              <a
-                href="/"
-                class={`text-avocado ${Astro.url.pathname === "/" ? "font-bold border-b-2 border-avocado" : ""}`}
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                href="/about"
-                class={`text-avocado ${Astro.url.pathname === "/about" ? "font-bold border-b-2 border-avocado" : ""}`}
-                >About</a
-              >
-            </li>
-            <li>
-              <a
-                href="/contact"
-                class={`text-avocado ${Astro.url.pathname === "/contact" ? "font-bold border-b-2 border-avocado" : ""}`}
-                >Reach out</a
-              >
-            </li>
-          </ul>
-          <ul
-            class="flex gap-x-8 rounded-full bg-gradient-to-br gradient bg-opacity-100 px-8 py-2"
-          >
-            <li>
-              <a
-                href="/blog"
-                class={`text-orange-100 ${Astro.url.pathname === "/blog" ? "font-bold border-b-2 border-orange-100" : ""}`}
-                >Blog</a
-              >
-            </li>
-          </ul>
-        </nav>
+        </li>
+      </ul>
+    </nav>
 
-        <button class="md:hidden" id="menu-toggle">
-          <div class="wrap">
-            <div class="burger">
-              <div class="strip burger-strip-2">
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
+    <button class="md:hidden" id="menu-toggle">
+      <div class="wrap">
+        <div class="burger">
+          <div class="strip burger-strip-2">
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
-        </button>
-
-        <!-- Mobile menu (hidden by default) -->
-        <div class="hidden md:hidden" id="mobile-menu">
-          <!-- Add your mobile menu items here -->
         </div>
+      </div>
+    </button>
 
-        <script>
-          document.addEventListener("DOMContentLoaded", () => {
-            const menuToggle = document.getElementById("menu-toggle");
-            const mobileMenu = document.getElementById("mobile-menu");
-
-            if (menuToggle && mobileMenu) {
-              menuToggle.addEventListener("click", () => {
-                mobileMenu.classList.toggle("hidden");
-              });
-            }
-          });
-        </script>
-      </header>
+    <!-- Mobile menu (hidden by default) -->
+    <div class="hidden md:hidden" id="mobile-menu">
+      <!-- Add your mobile menu items here -->
     </div>
-  </body>
-</html>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (menuToggle && mobileMenu) {
+          menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+          });
+        }
+      });
+    </script>
+  </header>
+</div>

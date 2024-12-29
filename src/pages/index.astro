@@ -5,37 +5,24 @@ import "../styles/globals.css";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Testimonials from "@/components/Testimonials.astro";
-import Lead from "../components/Lead.astro";
 import Lead2 from "../components/Lead2.astro";
+console.log(Astro.url);
 ---
 
 <Layout title="Tanya Stockdale's homepage">
-  <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      <meta name="viewport" content="width=device-width" />
-      <meta name="generator" content={Astro.generator} />
-    </head>
-    <body>
-      <div
-        class="bg top-0 z-[-2] w-full bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"
-      >
-        <div class="wrapper-div flex flex-col justify-between">
-          <div
-            class="hero w-4/6 max-w-[840px] min-w-[300px] mx-auto bg-opacity-0"
-          >
-            <Hero />
-          </div>
-        </div>
-        <div>
-          <Lead2 />
-          <Testimonials/>
-        </div>
-        
+  <div
+    class="bg top-0 z-[-2] w-full bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"
+  >
+    <div class="wrapper-div flex flex-col justify-between">
+      <div class="hero w-4/6 max-w-[840px] min-w-[300px] mx-auto bg-opacity-0">
+        <Hero />
       </div>
-    </body>
-  </html>
+    </div>
+    <div>
+      <Lead2 />
+      <Testimonials />
+    </div>
+  </div>
 </Layout>
 
 <style>

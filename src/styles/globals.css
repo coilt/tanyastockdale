@@ -271,3 +271,43 @@ textarea {
   resize: none;
   overflow: hidden;
 }
+
+.active {
+  border-bottom: 3px solid #4CAF50;
+  padding-bottom: 0.3rem;
+  font-weight: 600;
+  color: #4CAF50;
+}
+
+.sliding-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.sliding-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -8px; /* Adjusted to move the underline down */
+  left: 0;
+  background-color: #4CAF50; /* Use your avocado color here */
+  transition: width 0.3s ease-in-out;
+}
+
+.sliding-underline:hover::after {
+  width: 100%;
+}
+
+.sliding-underline.active::after {
+  display: none;
+}
+
+
+
+.menu-item {
+  color: #898989;
+  font-weight: 600;
+}
+
+ 
