@@ -1,5 +1,4 @@
 ---
-
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/quicksand";
 import "../styles/globals.css";
@@ -8,8 +7,7 @@ import Footer from "@/components/Footer.astro";
 import "aos/dist/aos.css";
 import "../styles/splitting.css";
 console.log("Rendering Layout, current path:", Astro.url.pathname);
-
-
+import MobileMenu from "../components/MobileMenu/index.jsx";
 ---
 
 <html lang="en">
@@ -29,10 +27,10 @@ console.log("Rendering Layout, current path:", Astro.url.pathname);
   </head>
   <body class="flex flex-col min-h-screen">
     <Header currentPath={Astro.url.pathname.toString()} />
+    <MobileMenu client:only="react" />
 
     <main class="flex-grow">
       <slot />
-
     </main>
     <Footer />
     <script></script>

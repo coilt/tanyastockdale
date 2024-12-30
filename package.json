@@ -19,8 +19,12 @@
     "@fontsource/khula": "^5.1.0",
     "@fontsource/playfair-display": "^5.1.0",
     "@fontsource/quicksand": "^5.1.0",
+    "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
+    "@pnpm/global-bin-dir": "^3.0.1",
     "@tryghost/content-api": "^1.11.21",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
     "@vueuse/core": "^12.0.0",
     "@vueuse/motion": "^2.2.6",
     "aos": "^2.3.4",
@@ -29,12 +33,15 @@
     "astro-tunnel": "^0.1.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.15.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.18",
     "lucide-vue-next": "^0.468.0",
     "motion": "^11.13.5",
     "nodemailer": "^6.9.16",
     "radix-vue": "^1.9.11",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "splitting": "^1.1.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^3.4.16",
@@ -48,6 +55,7 @@
     "@types/nodemailer": "^6.4.17",
     "@types/splitting": "^1.0.6",
     "prettier": "^3.4.2",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "sass-embedded": "^1.83.0"
   }
 }

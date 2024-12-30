@@ -6,12 +6,15 @@ import tunnel from "astro-tunnel";
 
 import lenis from "astro-lenis";
 
+import react from "@astrojs/react";
+
 export default defineConfig({
   integrations: [
-    tailwind(), 
-    vue(), 
-    tunnel(), 
-    lenis()
+    tailwind(),
+    vue(),
+    tunnel(),
+    lenis(),
+    react(),
   ],
  
 });
