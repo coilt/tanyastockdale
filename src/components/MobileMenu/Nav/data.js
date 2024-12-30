@@ -19,11 +19,11 @@ export const links = [
 
 export const footerLinks = [
   {
-    title: "LinkedIn",
-    href: "/",
+    title: "Instagram",
+    href: "https://instagram.com/stockdale_tanya",
   },
   {
-    title: "Instagram",
-    href: "/",
+    title: "LinkedIn",
+    href: "https://linkedin.com/in/tanya-stockdale-814052256",
   },
 ];
