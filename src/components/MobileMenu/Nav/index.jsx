@@ -11,11 +11,11 @@ export default function index() {
     {links.map((link, i) => {
       const { title, href } = link;
       return (
-        <div key={`b_${i}`} className={styles.linkContainer}>
-          <div className={styles.animatedLink}>
-            <a href={href}>{title}</a>
-          </div>
+        <div key={`b_${i}`} className={styles.linkContainer} style={{"--index": i}}>
+        <div className={styles.animatedLink}>
+          <a href={href}>{title}</a>
         </div>
+      </div>
       );
     })}
       </div>

@@ -7,21 +7,32 @@
   font-family: "Khula", sans-serif;
 }
 
-.header .menu {
-  width: "100vw";
-  max-width: "100vw";
-  height: 90vw;
-  background: linear-gradient(to bottom, #033526,  #000f0b );
-
-
-
-
-   
-  position: relative;
-}
-
 @media (min-width: 769px) {
   .header {
     display: none;
   }
+}
+
+.menu {
+  width: "100vw";
+  max-width: "100vw";
+  height: 100vw;
+  background: linear-gradient(to bottom, #033526, #000f0b);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+  position: relative;
+}
+
+.menu.closed {
+  transform: translateY(2000px);
+}
+
+.menu.open {
+  transform: translateY(0%);
 }
