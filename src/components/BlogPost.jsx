@@ -107,8 +107,8 @@ case "FIGURE":
   return (
     <div className="bg-white px-6 py-32 lg:px-8">
       <div className="mx-auto max-w-3xl text-base/7 text-gray-700">
-      <Button asChild className="mb-8 bg-emerald-800 hover:bg-emerald-600 transition-all duration-300 ease-in-out">
-        <a href="/blog">← Back to All Posts</a>
+      <Button asChild className="mb-8 bg-emerald-800 hover:bg-emerald-600 transition-all duration-300 ease-in-out p-4 sm:p-2">
+                <a href="/blog">← Back to All Posts</a>
       </Button>
         {post.feature_image && (
           <img
