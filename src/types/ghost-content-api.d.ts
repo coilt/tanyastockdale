@@ -19,5 +19,8 @@ interface GhostPost {
   excerpt: string;
   url: string;
   published_at: string;
+  feature_image: string;
+  slug: string;
+  post: string;
   // Add any other properties you're using from the Ghost API
 }

@@ -1,8 +1,8 @@
 {
-  "$schema": "https://shadcn-vue.com/schema.json",
-  "style": "default",
-  "typescript": true,
-  "tsConfigPath": "./tsconfig.json",
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
   "tailwind": {
     "config": "tailwind.config.mjs",
     "css": "src/styles/globals.css",
@@ -10,9 +10,12 @@
     "cssVariables": true,
     "prefix": ""
   },
-  "framework": "astro",
   "aliases": {
     "components": "@/components",
-    "utils": "@/lib/utils"
-  }
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "iconLibrary": "lucide"
 }

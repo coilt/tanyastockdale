@@ -3,7 +3,7 @@ import "@fontsource/playfair-display/700.css";
 import "@fontsource/quicksand";
 import "../styles/globals.css";
 import Layout from "@/layouts/Layout.astro";
-import "aos/dist/aos.css";
+
 console.log(Astro.url);
 ---
 
@@ -26,12 +26,11 @@ console.log(Astro.url);
           me mid-step.
         </p>
 
-        <figure class="mt-16">
+        <figure class="mt-16" id="portrait-figure">
           <img
             class="aspect-video rounded-2xl object-cover"
             src="/images/photo_2024-01-13_21-12-49.jpg"
             alt="Tanya Stockdale's portrait"
-            data-aos="fade-up"
           />
           <figcaption class="mt-4 flex gap-x-2 text-sm/6 text-gray-500">
             <svg
@@ -162,16 +161,24 @@ console.log(Astro.url);
       </div>
     </div>
   </main>
-</Layout >
+</Layout>
 
-  <script>
-    import AOS from "aos";
-    AOS.init();
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+  gsap.registerPlugin(ScrollTrigger);
 
-
-
-
-  </script>
- 
- 
+  gsap.from("#portrait-figure", {
+    scrollTrigger: {
+      trigger: "#portrait-figure",
+      start: "top bottom",
+      end: "top center",
+      scrub: true,
+      markers: false,
+    },
+    y: 400,
+    opacity: 0,
+    duration: 1,
+  });
+</script>

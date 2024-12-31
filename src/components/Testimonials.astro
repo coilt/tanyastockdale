@@ -40,22 +40,7 @@ import "@fontsource/quicksand";
           </svg>
         </div>
 
-        <div
-          class="absolute bottom-0 -right-3/4 w-72 h-72 mix-blend-multiply filter blur-2xl opacity-30 rounded-full"
-        >
-          <svg
-            id="10015.io"
-            viewBox="0 0 480 480"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            style="transform: scale(2); "
-          >
-            <path
-              fill="#ef76fc"
-              d="M390,270.5Q388,301,397.5,354Q407,407,358.5,407.5Q310,408,275,430.5Q240,453,212.5,412.5Q185,372,168.5,350Q152,328,95,326Q38,324,51.5,282Q65,240,68.5,205Q72,170,117,166Q162,162,184,159.5Q206,157,223,109Q240,61,269,80Q298,99,345.5,93Q393,87,397,130Q401,173,396.5,206.5Q392,240,390,270.5Z"
-            ></path>
-          </svg>
-        </div>
+ 
       </div>
 
       <div class="mx-auto max-w-2xl text-center ring-green-500">
@@ -69,7 +54,7 @@ import "@fontsource/quicksand";
         class="mx-auto mt-16 max-w-lg text-sm/6 text-gray-900 sm:mt-20 xl:mx-0 xl:max-w-none ring-orange-500"
       >
         <div class="space-y-8 xl:contents xl:space-y-0">
-          <div class="space-y-8 xl:row-span-2">
+          <div class="space-y-8 xl:row-span-2 max-w-lg m-auto testimonials">
             <figure
               class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12"
             >
@@ -87,9 +72,9 @@ import "@fontsource/quicksand";
                   Her personalized approach, focusing on tailored supplements
                   and practical dietary adjustments, has alleviated my
                   discomfort and boosted my overall well-being significantly.
-                  But it&apos;s not just about what goes into my body&mdash;she&apos;s
-                  also helped me reshape my mindset around food, fostering a
-                  healthier relationship with eating.
+                  But it&apos;s not just about what goes into my
+                  body&mdash;she&apos;s also helped me reshape my mindset around
+                  food, fostering a healthier relationship with eating.
                 </p>
                 <p class="mt-8">
                   I feel empowered, informed, and genuinely excited about
@@ -109,10 +94,8 @@ import "@fontsource/quicksand";
                 </div>
               </figcaption>
             </figure>
-
-            <!-- More testimonials... -->
           </div>
-          <div class="space-y-8 xl:row-start-1">
+          <div class="space-y-8 xl:row-start-1  max-w-lg m-auto testimonials">
             <figure
               class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12"
             >
@@ -141,12 +124,10 @@ import "@fontsource/quicksand";
                 </div>
               </figcaption>
             </figure>
-
-            <!-- More testimonials... -->
           </div>
         </div>
         <div class="space-y-8 xl:contents xl:space-y-0 mb-12">
-          <div class="space-y-8 xl:row-start-1">
+          <div class="space-y-8 xl:row-start-1  max-w-lg m-auto testimonials">
             <figure
               class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12"
             >
@@ -162,9 +143,9 @@ import "@fontsource/quicksand";
                   those prior to my battle.
                 </p>
                 <p class="mt-8">
-                  I have experienced positive impact of Tanya&apos;s interventions,
-                  which surpassed my expectations, and I highly recommend her
-                  services and expertise.”
+                  I have experienced positive impact of Tanya&apos;s
+                  interventions, which surpassed my expectations, and I highly
+                  recommend her services and expertise.”
                 </p>
               </blockquote>
               <figcaption class="mt-6 flex items-center gap-x-4">
@@ -181,7 +162,7 @@ import "@fontsource/quicksand";
 
             <!-- More testimonials... -->
           </div>
-          <div class="space-y-8 xl:row-span-2 mb-12">
+          <div class="space-y-8 xl:row-span-2 mb-12  max-w-lg m-auto testimonials">
             <figure
               class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12"
             >
@@ -203,9 +184,9 @@ import "@fontsource/quicksand";
                   shoulders just hearing that.
                 </p>
                 <p class="mt-8">
-                  Now, almost five months later I can say that the improvement is
-                  tremendous! I am forever grateful to Tanya and everything she
-                  did for me and my family (yes my daughter and my husband
+                  Now, almost five months later I can say that the improvement
+                  is tremendous! I am forever grateful to Tanya and everything
+                  she did for me and my family (yes my daughter and my husband
                   are both currently working with Tanya as well)!
                 </p>
                 <p class="mt-8">
@@ -221,7 +202,6 @@ import "@fontsource/quicksand";
                 />
                 <div>
                   <div class="font-semibold">Elena</div>
-                   
                 </div>
               </figcaption>
             </figure>
@@ -233,3 +213,23 @@ import "@fontsource/quicksand";
     </div>
   </div>
 </div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".testimonials", {
+    scrollTrigger: {
+      trigger: ".testimonials",
+      start: "top bottom",
+      end: "top center",
+      scrub: true,
+      markers: false,
+    },
+    y: 400,
+    opacity: 0,
+    duration: 1,
+  });
+</script>

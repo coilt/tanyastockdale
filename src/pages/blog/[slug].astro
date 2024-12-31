@@ -1,0 +1,22 @@
+---
+import BlogPost from '../../components/BlogPost.jsx';
+
+import Layout from '../../layouts/Layout.astro';
+import { getGhostPosts } from "../../lib/ghost";
+
+export async function getStaticPaths() {
+  const posts = await getGhostPosts();
+  return posts.map((post: { slug: string; }) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+ 
+const { post } = Astro.props;
+---
+
+<Layout title={post.title}>
+  <BlogPost client:load post={post} />
+</Layout>
+
+ 
