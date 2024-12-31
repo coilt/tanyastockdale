@@ -13,18 +13,21 @@ console.log(Astro.url);
   <main class="mt-20">
     {
       posts.map((post: GhostPost) => (
-        <div class="bg-white py-24 sm:py-16">
+        <div class="bg-white py-24 sm:py-8 ">
           <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl">
               <article class="flex max-w-xl flex-col items-start justify-between">
                 {post.feature_image && (
-                  <img
-                    src={post.feature_image}
-                    alt={post.title}
-                    class="w-full object-cover rounded-lg mb-6"
-                  />
+                  <a href={`/blog/${post.slug}`} class="w-full">
+                    <img
+                      src={post.feature_image}
+                      alt={post.title}
+                      class="w-full object-cover rounded-lg mb-6"
+                    />
+                  </a>
                 )}
-                <div class="flex items-center gap-x-4 text-xs">
+
+                <div class="gap-x-4 text-xs self-end">
                   <time datetime={post.published_at} class="text-gray-500">
                     {new Date(post.published_at).toLocaleDateString("en-US", {
                       year: "numeric",
@@ -33,14 +36,19 @@ console.log(Astro.url);
                     })}
                   </time>
                 </div>
-                <div class="group relative">
-                  <h3 class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
+                <div class="group relative mt-2 mb-6">
+                  <h3 class=" px-4 mb-0 mt-4 text-lg font-semibold text-gray-900">
                     {" "}
                     <a href={`/blog/${post.slug}`}>{post.title}</a>
                   </h3>
-                  <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600">
+                  <p class="p-4 mt-0 text-md/6 text-gray-600">
                     {post.excerpt}{" "}
                   </p>
+                  <a
+                    href={`/blog/${post.slug}`}
+                    class="tap-overlay absolute inset-0 bg-white opacity-0 group-hover:opacity-100 ring-1 ring-slate-200 shadow-xl mix-blend-multiply transition-all duration-300 rounded-lg"
+                    aria-label="Read more about {post.title}"
+                  />
                 </div>
               </article>
             </div>
