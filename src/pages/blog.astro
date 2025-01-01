@@ -3,6 +3,7 @@ import "@fontsource/playfair-display/700.css";
 import "@fontsource/quicksand";
 import "../styles/globals.css";
 import { getGhostPosts } from "../lib/ghost";
+import type { PostOrPage } from "@tryghost/content-api";
 import Layout from "@/layouts/Layout.astro";
 
 const posts = await getGhostPosts();
@@ -12,7 +13,7 @@ console.log(Astro.url);
 <Layout title="Tanya Stockdale's blog">
   <main class="mt-20">
     {
-      posts.map((post: GhostPost) => (
+      posts.map((post: PostOrPage) => (
         <div class="bg-white py-24 sm:py-8 ">
           <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl">
@@ -22,14 +23,16 @@ console.log(Astro.url);
                     <img
                       src={post.feature_image}
                       alt={post.title}
-                      class="w-full object-cover rounded-lg mb-6"
+                      class="w-full object-cover rounded-lg mb-6 hover:shadow-2xl transition-all ease-in-out duration-300"
                     />
                   </a>
                 )}
 
                 <div class="gap-x-4 text-xs self-end">
                   <time datetime={post.published_at} class="text-gray-500">
-                    {new Date(post.published_at).toLocaleDateString("en-US", {
+                    {new Date(
+                      post.published_at || Date.now(),
+                    ).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "short",
                       day: "numeric",
@@ -37,11 +40,11 @@ console.log(Astro.url);
                   </time>
                 </div>
                 <div class="group relative mt-2 mb-6">
-                  <h3 class=" px-4 mb-0 mt-4 text-lg font-semibold text-gray-900">
+                  <h3 class=" px-8 mb-2 mt-8 text-lg font-semibold text-gray-900">
                     {" "}
                     <a href={`/blog/${post.slug}`}>{post.title}</a>
                   </h3>
-                  <p class="p-4 mt-0 text-md/6 text-gray-600">
+                  <p class="px-8 mt-0 mb-8 text-md/6 text-gray-600">
                     {post.excerpt}{" "}
                   </p>
                   <a

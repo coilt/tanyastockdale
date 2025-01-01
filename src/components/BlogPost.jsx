@@ -123,5 +123,19 @@ case "FIGURE":
     </div>
   );
 };
+
+
+const BlogPosts = ({ posts }) => {
+  return (
+    <main className="mt-20">
+      {posts.map((post) => (
+        <BlogPost key={post.id} post={post} />
+      ))}
+    </main>
+  );
+};
   
-export default BlogPost;
+export { BlogPost, BlogPosts };
+
+
+

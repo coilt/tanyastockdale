@@ -15,12 +15,22 @@
 
 
 interface GhostPost {
+  id: string;
   title: string;
   excerpt: string;
   url: string;
   published_at: string;
   feature_image: string;
   slug: string;
-  post: string;
+  post: string;  
   // Add any other properties you're using from the Ghost API
+}
+ 
+
+export async function getStaticPaths() {
+  const posts = await getGhostPosts();
+  return posts.map((post: GhostPost) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
 }
