@@ -6,7 +6,7 @@ import "../styles/components.css";
 ---
 
 <div class="hero-wrapper">
-  <h1 class="hero-title solid-title" data-splitting>
+  <h1 class="hero-title solid-title invisible" data-splitting>
     Discover Proactive Wellness with Functional Medicine
   </h1>
   <div class="title-overlay"></div>
@@ -24,9 +24,12 @@ import "../styles/components.css";
 
   Splitting(); // comment this out to view without the lib
 
+  const heroTitle = document.querySelector('.hero-title');
   const timeline = gsap.timeline();
 
-  timeline.from(".hero-title .char", {
+  timeline
+  .set(heroTitle, { visibility: 'visible' })
+  .from(".hero-title .char", {
     filter: "blur(10px)",
     duration: 0.8,
     delay: 0.6,

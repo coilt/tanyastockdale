@@ -26,7 +26,7 @@ console.log(Astro.url);
           me mid-step.
         </p>
 
-        <figure class="mt-16" id="portrait-figure">
+        <figure class="mt-16 invisible" id="portrait-figure">
           <img
             class="aspect-video rounded-2xl object-cover"
             src="/images/photo_2024-01-13_21-12-49.jpg"
@@ -169,7 +169,12 @@ console.log(Astro.url);
 
   gsap.registerPlugin(ScrollTrigger);
 
-  gsap.from("#portrait-figure", {
+  const portraitFigure = document.querySelector('#portrait-figure');
+  const timeline = gsap.timeline();
+
+  timeline
+  .set(portraitFigure, { visibility: 'visible' })
+  .from("#portrait-figure", {
     scrollTrigger: {
       trigger: "#portrait-figure",
       start: "top bottom",

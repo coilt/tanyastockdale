@@ -17,11 +17,21 @@ import MobileMenu from "../components/MobileMenu/index.jsx";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Tanya Stockdale | Functional Medicine Practitioner</title>
+    <style is:inline>
+      html {
+        visibility: hidden;
+        opacity: 0;
+      }
+    </style>
     <style is:global>
       .box {
         width: 100px;
         height: 100px;
         background: black;
+      }
+      html {
+        visibility: visible;
+        opacity: 1;
       }
     </style>
   </head>
