@@ -5,6 +5,7 @@ import "../styles/globals.css";
 import { getGhostPosts } from "../lib/ghost";
 import type { PostOrPage } from "@tryghost/content-api";
 import Layout from "@/layouts/Layout.astro";
+import {fadeLastCharacters} from '../lib/fade'
 
 // Fetch posts on each request
 const posts = await getGhostPosts();
@@ -39,14 +40,23 @@ const posts = await getGhostPosts();
                     })}
                   </time>
                 </div>
-                <div class="group relative mt-2 mb-6  hyphens-auto">
+                <div class="group relative mt-2 mb-6 hyphens-auto">
                   <h3 class="px-8 mb-2 mt-8 text-lg font-semibold text-gray-900 group-hover:text-emerald-500 transition-all duration-300 ease-in-out">
                     {" "}
                     <a href={`/blog/${post.slug}`}>{post.title}</a>
                   </h3>
-                  <p class="px-8 mt-0 mb-8 text-md/6 text-gray-600">
+                  <div class="excerpt-container">
+
+                  <p class="px-8 mt-0 mb-8 text-md/6 text-gray-600" set:html={fadeLastCharacters(post.excerpt)}>
                     {post.excerpt}{" "}
                   </p>
+              </div>
+
+
+
+
+                
+ 
                   <a
                     href={`/blog/${post.slug}`}
                     class="tap-overlay absolute inset-0 ring-1 ring-slate-200 group-hover:shadow-xl group-hover:ring-0 transition-all duration-300 rounded-lg"
@@ -61,3 +71,12 @@ const posts = await getGhostPosts();
     }
   </main>
 </Layout>
+
+ 
+
+
+<script>
+   
+</script>
+
+ 

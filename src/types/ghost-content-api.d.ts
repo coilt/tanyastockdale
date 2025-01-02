@@ -34,3 +34,14 @@ export async function getStaticPaths() {
     props: { post },
   }));
 }
+
+declare module '@tryghost/content-api' {
+  export interface PostOrPage {
+    // Define the properties of PostOrPage here
+    id: string;
+    title: string;
+    // Add other properties as needed
+  }
+
+  // Add other types and interfaces as necessary
+}

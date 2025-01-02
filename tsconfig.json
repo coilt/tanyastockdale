@@ -5,7 +5,13 @@
     "**/*",
     "types/**/*",
     "src/**/*",
-    "src/types/*"
+    "src/types/*",
+    "src/**/*.ts",
+     "src/**/*.d.ts",
+     "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/types/**/*.ts",
+    "src/types/**/*.d.ts"
 
   ],
   "exclude": [
