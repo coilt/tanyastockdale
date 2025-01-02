@@ -144,7 +144,11 @@ export default {
   		}
   	}
   },
-  plugins: [animate, require("tailwindcss-animate")],
-  purge: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'] 
+  plugins: [
+		animate, require("tailwindcss-animate"),
+		require('tailwindcss-line-clamp-no-ellipsis'),
+	],
+	
+ 
  
 };
