@@ -17,6 +17,9 @@ export default {
   		}
   	},
   	extend: {
+			boxShadow: {
+        'xl': '0px 0px 25px -5px rgba(0, 0, 0, 0.2)',
+      },
   		fontFamily: {
   			sans: [
   				'Quicksand'

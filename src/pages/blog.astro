@@ -23,7 +23,7 @@ const posts = await getGhostPosts();
                     <img
                       src={post.feature_image}
                       alt={post.title}
-                      class="w-full object-cover rounded-lg mb-6 hover:shadow-2xl transition-all ease-in-out duration-300"
+                      class="w-full object-cover rounded-lg mb-6 hover:ring-4 hover:ring-gray-300 transition-all ease-in-out duration-300"
                     />
                   </a>
                 )}
@@ -49,7 +49,7 @@ const posts = await getGhostPosts();
                   </p>
                   <a
                     href={`/blog/${post.slug}`}
-                    class="tap-overlay absolute inset-0 ring-1 ring-slate-200 bg-white opacity-100  group-hover:ring-1 group-hover:ring-slate-200 group-hover:shadow-xl mix-blend-multiply transition-all duration-300 rounded-lg"
+                    class="tap-overlay absolute inset-0 ring-1 ring-slate-200 group-hover:shadow-xl group-hover:ring-0 transition-all duration-300 rounded-lg"
                     aria-label="Read more about {post.title}"
                   />
                 </div>
