@@ -17,6 +17,14 @@ export default {
   		}
   	},
   	extend: {
+			lineClamp: {
+				7: '7',
+				8: '8',
+				9: '9',
+				10: '10',
+				11: '11',
+        12: '12',
+			},
 			boxShadow: {
         'xl': '0px 0px 25px -5px rgba(0, 0, 0, 0.2)',
       },

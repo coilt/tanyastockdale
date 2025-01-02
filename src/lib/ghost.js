@@ -9,6 +9,8 @@ const api = new GhostContentAPI({
 export async function getGhostPosts() {
   return await api.posts.browse({ 
     limit: 'all',
-    timestamp: new Date().getTime() 
+     
+    timestamp: new Date().getTime(),
+     
   });
 }
