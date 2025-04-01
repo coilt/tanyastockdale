@@ -1,5 +1,4 @@
 import React from "react";
-import { CheckCircleIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 import { parse } from "node-html-parser";
 import { Button } from "@/components/ui/button"
 

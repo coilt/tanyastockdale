@@ -16,7 +16,9 @@ export default defineConfig({
   integrations: [
     tailwind(),
     vue(),
-    tunnel(),
+    tunnel({
+      // You can specify host here if needed for the tunnel
+    }),
     lenis(),
     react(),
   ],
