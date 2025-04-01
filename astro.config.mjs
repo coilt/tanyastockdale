@@ -7,6 +7,7 @@ import lenis from "astro-lenis";
 import react from "@astrojs/react";
 
 export default defineConfig({
+  output: 'server',
   srcDir: "./src",
   integrations: [
     tailwind(),
