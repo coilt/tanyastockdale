@@ -6,11 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+     "start": "node ./dist/server/entry.mjs"
   },
   "dependencies": {
     "@0x21106/splittext": "github:ayhanexe/gsap-class-based-split-text-plugin",
     "@astrojs/check": "^0.9.4",
+    "@astrojs/node": "^9.1.3",
     "@astrojs/react": "^4.2.3",
     "@astrojs/tailwind": "^6.0.2",
     "@astrojs/ts-plugin": "^1.10.4",
