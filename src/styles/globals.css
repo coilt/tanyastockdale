@@ -367,3 +367,12 @@ textarea {
 .border-emerald-800 {
   border-color: #065f46;
 }
+
+
+/* Add this to your CSS */
+#content-container p:not(.lead-heading) {
+  @apply mt-6 text-xl/8;
+}
+
+
+

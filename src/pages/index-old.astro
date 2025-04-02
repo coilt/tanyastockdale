@@ -1,0 +1,60 @@
+---
+import "@fontsource/playfair-display/700.css";
+import "@fontsource/quicksand";
+import "../styles/globals.css";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Testimonials from "@/components/Testimonials.astro";
+import Lead2 from "../components/Lead2.astro";
+console.log(Astro.url);
+---
+
+<Layout title="Tanya Stockdale's homepage">
+  
+
+
+
+
+  <div
+    class="bg top-0 z-[-2] w-full bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"
+  >
+    <div class="wrapper-div flex flex-col justify-between">
+      <div class="hero w-4/6 max-w-[840px] min-w-[300px] mx-auto bg-opacity-0">
+        <Hero />
+      </div>
+    </div>
+    <div>
+      <Lead2 />
+      <Testimonials />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .bg {
+    min-height: 100vh;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-image: url("/images/index-bg-3-opt.jpg");
+    background-position: center 50vh;
+  }
+
+  @media (max-width: 768px) {
+    .bg {
+      background-position: center 22%;
+    }
+  }
+  @media (max-width: 2268px) {
+    .hero {
+      height: 300px;
+    }
+  }
+
+  .wrapper-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+  }
+</style>

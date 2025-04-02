@@ -1,3 +1,10 @@
+// Function to convert text to Sentence case
+function toSentenceCase(text) {
+  if (!text || typeof text !== 'string') return '';
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}
+
+// Export static links that will always work
 export const links = [
   {
     title: "Home",
@@ -8,7 +15,7 @@ export const links = [
     href: "/about",
   },
   {
-    title: "Reach out",
+    title: "Contact",
     href: "/contact",
   },
   {
@@ -17,6 +24,7 @@ export const links = [
   },
 ];
 
+// Keep the footer links unchanged
 export const footerLinks = [
   {
     title: "Instagram",

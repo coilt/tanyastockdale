@@ -1,6 +1,41 @@
 ---
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/quicksand";
+
+// Accept content from props
+const { content } = Astro.props;
+
+// Default content if nothing is provided from Strapi
+const defaultContent = {
+  heading: "Here is what my clients say",
+  testimonials: [
+    {
+      title: "Thank you for your unwavering support",
+      content: [
+        "\"I can't thank my Functional Medicine Practitioner, Tanya Stockdale, enough for the incredible transformation she's guided me through over the past three months. From battling constant bloating and uncontrollable cravings to now feeling balanced, energized, and in control of my eating habits, her expertise has been a game-changer.",
+        "Her personalized approach, focusing on tailored supplements and practical dietary adjustments, has alleviated my discomfort and boosted my overall well-being significantly. But it's not just about what goes into my body—she's also helped me reshape my mindset around food, fostering a healthier relationship with eating.",
+        'I feel empowered, informed, and genuinely excited about sustaining this newfound balance and vitality. Thank you for your unwavering support, encouragement, and invaluable guidance on this journey to a healthier, happier me!"',
+      ],
+      author: "Tallulah Adey",
+      image: "/images/tallulah.jpg",
+    },
+  ],
+};
+
+// Use content from Strapi if available, otherwise use defaults
+const heading = content?.heading || defaultContent.heading;
+const testimonials = content?.testimonials || defaultContent.testimonials;
+
+// Function to chunk testimonials into groups of 2 for layout
+function chunkArray(array: string | any[], size: number) {
+  const chunked = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunked.push(array.slice(i, i + size));
+  }
+  return chunked;
+}
+
+const testimonialGroups = chunkArray(testimonials, 2);
 ---
 
 <div class="bg-white py-24 sm:py-32 overflow-x-clip">
@@ -39,177 +74,68 @@ import "@fontsource/quicksand";
             ></path>
           </svg>
         </div>
-
- 
       </div>
 
       <div class="mx-auto max-w-2xl text-center ring-green-500">
         <p
           class="mt-2 text-4xl font-serif tracking-tight text-balance text-gray-900 sm:text-5xl"
         >
-          Here is what my clients say
+          {heading}
         </p>
       </div>
-      <div
-        class="mx-auto mt-16 max-w-lg text-sm/6 text-gray-900 sm:mt-20 xl:mx-0 xl:max-w-none ring-orange-500"
-      >
-        <div class="space-y-8 xl:contents xl:space-y-0">
-          <div class="space-y-8 xl:row-span-2 max-w-lg m-auto testimonials">
-            <figure
-              class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12"
-            >
-              <h3 class="featured">Thank you for your unwavering support</h3>
-              <blockquote class="text-gray-900">
-                <p>
-                  “I can&apos;t thank my Functional Medicine Practitioner, Tanya
-                  Stockdale, enough for the incredible transformation she&apos;s
-                  guided me through over the past three months. From battling
-                  constant bloating and uncontrollable cravings to now feeling
-                  balanced, energized, and in control of my eating habits, her
-                  expertise has been a game-changer.
-                </p>
-                <p class="mt-8">
-                  Her personalized approach, focusing on tailored supplements
-                  and practical dietary adjustments, has alleviated my
-                  discomfort and boosted my overall well-being significantly.
-                  But it&apos;s not just about what goes into my
-                  body&mdash;she&apos;s also helped me reshape my mindset around
-                  food, fostering a healthier relationship with eating.
-                </p>
-                <p class="mt-8">
-                  I feel empowered, informed, and genuinely excited about
-                  sustaining this newfound balance and vitality. Thank you for
-                  your unwavering support, encouragement, and invaluable
-                  guidance on this journey to a healthier, happier me!”
-                </p>
-              </blockquote>
-              <figcaption class="mt-6 flex items-center gap-x-4">
-                <img
-                  class="size-10 rounded-full bg-gray-50"
-                  src="/images/tallulah.jpg"
-                  alt=""
-                />
-                <div>
-                  <div class="font-semibold">Tallulah Adey</div>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="space-y-8 xl:row-start-1  max-w-lg m-auto testimonials">
-            <figure
-              class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12"
-            >
-              <h3 class="featured">A huge source of knowledge and support</h3>
-              <blockquote class="text-gray-900">
-                <p>
-                  “I first met Tanya when I joined one of her workshops. I was
-                  nervous to join as l did not know what to expect, but l am so
-                  glad l attended! She created such a warm and welcoming
-                  atmosphere.
-                </p>
-                <p class="mt-8">
-                  I highly recommend Tanya. She is a huge source of knowledge
-                  and support for everything a woman may be experiencing or
-                  going through.”
-                </p>
-              </blockquote>
-              <figcaption class="mt-6 flex items-center gap-x-4">
-                <img
-                  class="size-10 rounded-full bg-gray-50"
-                  src="/images/zoe.jpg"
-                  alt="Zoe Edmunds testimonial photo"
-                />
-                <div>
-                  <div class="font-semibold">Zoe Edmunds</div>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-        <div class="space-y-8 xl:contents xl:space-y-0 mb-12">
-          <div class="space-y-8 xl:row-start-1  max-w-lg m-auto testimonials">
-            <figure
-              class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12"
-            >
-              <h3 class="featured">Surpassed my expectations</h3>
-              <blockquote class="text-gray-900">
-                <p>
-                  “During a challenging period with my health, I sought the
-                  guidance of Tanya. She thoroughly assessed my symptoms and,
-                  based on my blood results, recommended adjustments to my
-                  lifestyle. Remarkably, I began to notice significant
-                  improvements. The persistent, debilitating pain in my stomach
-                  gradually disappeared, and today, my energy levels surpass
-                  those prior to my battle.
-                </p>
-                <p class="mt-8">
-                  I have experienced positive impact of Tanya&apos;s
-                  interventions, which surpassed my expectations, and I highly
-                  recommend her services and expertise.”
-                </p>
-              </blockquote>
-              <figcaption class="mt-6 flex items-center gap-x-4">
-                <img
-                  class="size-10 rounded-full bg-gray-50"
-                  src="/images/elina.jpg"
-                  alt=""
-                />
-                <div>
-                  <div class="font-semibold">Elina Passarino</div>
-                </div>
-              </figcaption>
-            </figure>
 
-            <!-- More testimonials... -->
+      {
+        testimonialGroups.map((group, groupIndex) => (
+          <div class="mx-auto mt-16 max-w-lg text-sm/6 text-gray-900 sm:mt-20 xl:mx-0 xl:max-w-none ring-orange-500">
+            <div class="space-y-8 xl:contents xl:space-y-0">
+              {Array.isArray(group) &&
+                group.map(
+                  (
+                    testimonial: {
+                      title: unknown;
+                      content: any[];
+                      image: { data: { attributes: { url: any } } };
+                      author: unknown;
+                    },
+                    index: number,
+                  ) => (
+                    <div
+                      class={`space-y-8 ${index === 0 && group.length > 1 ? "xl:row-span-2" : "xl:row-start-1"} max-w-lg m-auto testimonials`}
+                    >
+                      <figure class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12">
+                        <h3 class="featured">{testimonial.title}</h3>
+                        <blockquote class="text-gray-900">
+                          {testimonial.content.map(
+                            (paragraph: unknown, pIndex: number) => (
+                              <p class={pIndex > 0 ? "mt-8" : ""}>
+                                {paragraph}
+                              </p>
+                            ),
+                          )}
+                        </blockquote>
+                        <figcaption class="mt-6 flex items-center gap-x-4">
+                          <img
+                            class="size-10 rounded-full bg-gray-50"
+                            src={
+                              testimonial.image?.data?.attributes?.url ||
+                              testimonial.image
+                            }
+                            alt={`${testimonial.author} testimonial photo`}
+                          />
+                          <div>
+                            <div class="font-semibold">
+                              {testimonial.author}
+                            </div>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+                  ),
+                )}
+            </div>
           </div>
-          <div class="space-y-8 xl:row-span-2 mb-12  max-w-lg m-auto testimonials">
-            <figure
-              class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12"
-            >
-              <h3 class="featured">I am forever grateful</h3>
-              <blockquote class="text-gray-900">
-                <p>
-                  “I started working with Tanya in June. By then I very much was
-                  feeling like I will probably never get better. I was pretty
-                  much reacting to anything. Food. Shampoos. Pets. Hair sprays.
-                  Sunblocks. Make up. My flawless skin turned bright red and
-                  developed visible capillaries. Rosacea. My sleep was none
-                  existent. I was anxious. Unable to eat, exercise, constantly
-                  flushing and just not living but rather trying to survive.
-                </p>
-                <p class="mt-8">
-                  Tanya suggested a few blood tests and gave me a list of
-                  supplements. She also gave me hope and reassurance that I can
-                  and will get better. It felt like a weight was taken off my
-                  shoulders just hearing that.
-                </p>
-                <p class="mt-8">
-                  Now, almost five months later I can say that the improvement
-                  is tremendous! I am forever grateful to Tanya and everything
-                  she did for me and my family (yes my daughter and my husband
-                  are both currently working with Tanya as well)!
-                </p>
-                <p class="mt-8">
-                  Tanya has a brilliant mind, a heart of gold and perseverance!
-                  And most importantly she makes you feel like you can do it!”
-                </p>
-              </blockquote>
-              <figcaption class="mt-6 flex items-center gap-x-4">
-                <img
-                  class="size-10 rounded-full bg-gray-50"
-                  src="/images/helena.jpg"
-                  alt=""
-                />
-                <div>
-                  <div class="font-semibold">Elena</div>
-                </div>
-              </figcaption>
-            </figure>
-
-            <!-- More testimonials... -->
-          </div>
-        </div>
-      </div>
+        ))
+      }
     </div>
   </div>
 </div>

@@ -1,26 +1,61 @@
 ---
-import { getNavigation } from '../lib/strapi';
+import { getNavigation, getPages } from '../lib/strapi';
 
 const currentPath = Astro.url.pathname;
+
 let navItems = [];
+let allPages = [];
 
 try {
+  // Try to get navigation items from Strapi
   navItems = await getNavigation();
-  console.log("Navigation items:", navItems);
+  
+  // Also fetch all pages
+  allPages = await getPages();
+  console.log("All pages:", allPages);
 } catch (error) {
-  console.error("Error fetching navigation:", error);
+  console.error("Error fetching data:", error);
 }
 
-// Fallback to static navigation if Strapi fails
+// Format pages based on their actual structure
+const formattedPages = allPages.map(page => {
+  let slug = "";
+  let title = "Untitled";
+  
+  if (page.slug !== undefined) {
+    slug = page.slug;
+    title = page.title || "Untitled";
+    
+    // Map "index" or "home" slug to empty string (root URL)
+    if (slug === "index" || slug === "home" || slug === "") {
+      slug = "";
+    }
+  }
+  
+  return {
+    attributes: {
+      slug,
+      title
+    }
+  };
+});
+
+// Fallback to static navigation if both Strapi calls fail
 const staticNavPaths = ["", "about", "contact"];
-const displayNavItems = navItems.length > 0 
-  ? navItems 
-  : staticNavPaths.map(path => ({ 
-      attributes: { 
-        slug: path, 
-        title: path ? path.charAt(0).toUpperCase() + path.slice(1) : "Home" 
-      } 
+const displayNavItems = formattedPages.length > 0
+  ? formattedPages
+  : staticNavPaths.map(path => ({
+      attributes: {
+        slug: path,
+        title: path ? path.charAt(0).toUpperCase() + path.slice(1) : "Home"
+      }
     }));
+
+// Function to convert text to Sentence case
+function toSentenceCase(text) {
+  if (!text || typeof text !== 'string') return '';
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}
 ---
 
 <div class="fixed top-0 left-0 right-0 bg-white bg-opacity-80 z-50 backdrop-blur-sm">
@@ -40,7 +75,7 @@ const displayNavItems = navItems.length > 0
             const attributes = item.attributes || {};
             const path = attributes.slug || "";
             const title = attributes.title || "Untitled";
-            
+           
             const isActive =
               path === ""
                 ? currentPath === "/" || currentPath === ""
@@ -52,7 +87,7 @@ const displayNavItems = navItems.length > 0
                   href={`/${path}`}
                   class={`sliding-underline ${isActive ? "active" : "menu-item"}`}
                 >
-                  {title}
+                  {toSentenceCase(title)}
                 </a>
               </li>
             );

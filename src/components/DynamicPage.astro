@@ -44,7 +44,7 @@ try {
       htmlContent = richText.map(block => {
         if (block.type === 'paragraph') {
           const text = block.children.map((child: { text: any; }) => child.text).join('');
-          return `<p>${text}</p>`;
+          return `<p class="content-paragraph">${text}</p>`;
         } else if (block.type === 'quote' || block.type === 'blockquote') {
           const text = block.children.map((child: { text: any; }) => child.text).join('');
           return `
@@ -103,9 +103,9 @@ const contentImageUrl = image?.url
       </figure>
     )}
 
-    <div class="mt-10 max-w-2xl prose prose-emerald prose-lg">
+    <div class="mx-auto max-w-3xl text-base/7 text-gray-700">
       {/* Render the processed HTML content */}
-      <div set:html={htmlContent} id="content-container" />
+      <div  set:html={htmlContent} id="content-container" />
     </div>
 
     {contentImageUrl && (
@@ -143,7 +143,7 @@ const contentImageUrl = image?.url
       // Transform h3 headings to match the eyebrow style
       const h3Elements = contentContainer.querySelectorAll('h3');
       h3Elements.forEach(h3 => {
-        h3.className = "text-base/7 featured font-serif font-semibold";
+        h3.className = "text-base/7 featured font-serif font-semibold pt-20";
       });
       
       // Transform blockquotes

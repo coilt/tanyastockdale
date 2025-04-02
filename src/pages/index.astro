@@ -6,37 +6,66 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Testimonials from "@/components/Testimonials.astro";
 import Lead2 from "../components/Lead2.astro";
+import { getHomepage } from "../lib/strapi";
+
 console.log(Astro.url);
+
+// Fetch the homepage content from Strapi
+let homePageContent = null;
+try {
+  homePageContent = await getHomepage();
+  console.log("Homepage content:", homePageContent);
+} catch (error) {
+  console.error("Error fetching homepage content:", error);
+}
+
+// Get the Strapi URL for image paths
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "https://strapi.substorm.cc";
+
+// Background image from Strapi or fallback
+const backgroundImage = homePageContent?.backgroundImage?.url 
+  ? `${STRAPI_URL}${homePageContent.backgroundImage.url}` 
+  : "/images/index-bg-3-opt.jpg";
 ---
 
 <Layout title="Tanya Stockdale's homepage">
-  
-
-
-
-
   <div
     class="bg top-0 z-[-2] w-full bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"
   >
     <div class="wrapper-div flex flex-col justify-between">
       <div class="hero w-4/6 max-w-[840px] min-w-[300px] mx-auto bg-opacity-0">
-        <Hero />
+        <Hero content={homePageContent?.Hero} />
       </div>
     </div>
     <div>
-      <Lead2 />
-      <Testimonials />
+      <Lead2 content={{
+        quote: homePageContent?.Lead?.quote,
+        imageAlt: homePageContent?.Lead?.imageAlt,
+        paragraphs: homePageContent?.paragraphs?.[0]?.Paragraph.split('\n\n') || [],
+        image: homePageContent?.Lead?.image?.url ? `${STRAPI_URL}${homePageContent.Lead.image.url}` : "/images/this-is-fine.jpg"
+      }} />
+      <Testimonials content={{
+        heading: homePageContent?.heading,
+        testimonials: [
+          {
+            title: homePageContent?.Card?.title,
+            content: homePageContent?.Card?.paragraph.split('\n\n') || [],
+            author: homePageContent?.Card?.author,
+            image: homePageContent?.Card?.image?.url ? `${STRAPI_URL}${homePageContent.Card.image.url}` : "/images/tallulah.jpg"
+          }
+        ]
+      }} />
     </div>
   </div>
 </Layout>
 
-<style>
+<style define:vars={{ backgroundImage: `url("${backgroundImage}")` }}>
   .bg {
     min-height: 100vh;
     background-size: 100% auto;
     background-repeat: no-repeat;
     width: 100%;
-    background-image: url("/images/index-bg-3-opt.jpg");
+    background-image: var(--backgroundImage);
     background-position: center 50vh;
   }
 

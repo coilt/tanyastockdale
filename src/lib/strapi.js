@@ -41,6 +41,57 @@ export async function fetchFromStrapi(endpoint, params = {}) {
   }
 }
 
+
+
+
+// Get the homepage content (single type)
+export async function getHomepage() {
+  try {
+    const data = await fetchFromStrapi("homepage?populate=deep");
+    console.log("Raw Strapi response:", data); // Add this for debugging
+    
+    if (data && data.data) {
+      return data.data;
+    }
+    
+    console.warn("Unexpected data structure from Strapi homepage API:", data);
+    return null;
+  } catch (error) {
+    console.error("Error in getHomepage:", error);
+    return null;
+  }
+}
+
+
+ 
+
+
+// Add this function to your existing strapi.js file
+
+/**
+ * Fetch all pages from Strapi
+ * @returns {Promise<Array>} Array of page objects
+ */
+export async function getPages() {
+  try {
+    const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "https://strapi.substorm.cc";
+    const response = await fetch(`${STRAPI_URL}/api/pages?populate=*`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch pages: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data.data || [];
+  } catch (error) {
+    console.error("Error fetching pages:", error);
+    return [];
+  }
+}
+
+
+
+
 // Get all pages for navigation
 export async function getNavigation() {
   try {
@@ -86,3 +137,5 @@ export async function getAllPages() {
     return [];
   }
 }
+
+
