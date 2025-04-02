@@ -13,6 +13,8 @@ export default defineConfig({
     mode: 'standalone' // This is important for Coolify deployments
   }),
   srcDir: "./src",
+  outDir: "./dist", // Make sure this is explicitly set
+  publicDir: "./public", // Make sure this is explicitly set
   integrations: [
     tailwind(),
     vue(),
@@ -22,4 +24,8 @@ export default defineConfig({
     lenis(),
     react(),
   ],
+  // Add this to ensure TinaCMS admin routes are handled correctly
+  server: {
+    host: '0.0.0.0',
+  },
 });

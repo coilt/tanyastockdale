@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import DynamicPage from "@/components/DynamicPage.astro";
+import { getNavigation } from "@/lib/strapi";
+
+// Get the slug from the URL
+const { slug } = Astro.params;
+
+// Fetch all pages
+const allPages = await getNavigation();
+
+// Find the page with a case-insensitive slug match
+const page = allPages.find((p: { slug: string; }) => 
+  p.slug.toLowerCase() === (slug ?? "").toLowerCase()
+);
+
+// If page not found, return 404
+if (!page) {
+  return Astro.redirect('/404');
+}
+
+// Extract page metadata for SEO directly from the page object
+// NOT from page.attributes since your data doesn't have that structure
+const pageTitle = page.heading || page.title || "Page";
+---
+
+<Layout title={pageTitle}>
+  <main>
+    <DynamicPage page={page} />
+  </main>
+</Layout>

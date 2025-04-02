@@ -1,0 +1,25 @@
+---
+import HeroBlock from './blocks/HeroBlock.astro';
+import TextBlock from './blocks/TextBlock.astro';
+import QuoteBlock from './blocks/QuoteBlock.astro';
+import ImageBlock from './blocks/ImageBlock.astro';
+import TwoColumnBlock from './blocks/TwoColumnBlock.astro';
+
+const { blocks } = Astro.props;
+
+// Map component types to their respective components
+const componentMap = {
+  'hero-block': HeroBlock,
+  'text-block': TextBlock,
+  'quote-block': QuoteBlock,
+  'image-block': ImageBlock,
+  'two-column-block': TwoColumnBlock,
+};
+---
+
+<div>
+  {blocks && blocks.map((block: { __component: keyof typeof componentMap; }) => {
+    const Component = componentMap[block.__component];
+    return Component ? <Component data={block} /> : <p>Unknown block type: {block.__component}</p>;
+  })}
+</div>

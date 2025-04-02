@@ -1,0 +1,35 @@
+---
+const { data } = Astro.props;
+---
+
+<section class="relative py-20 bg-gray-50">
+  {data.backgroundImage?.data && (
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <img 
+        src={data.backgroundImage.data.attributes.url} 
+        alt="" 
+        class="object-cover w-full h-full"
+      />
+      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    </div>
+  )}
+  
+  <div class="relative z-10 container mx-auto px-6 text-center">
+    <h1 class="text-4xl md:text-5xl font-serif font-semibold text-avocado mb-4">
+      {data.heading}
+    </h1>
+    {data.subheading && (
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        {data.subheading}
+      </p>
+    )}
+    {data.ctaText && data.ctaLink && (
+      <a 
+        href={data.ctaLink} 
+        class="inline-block px-8 py-3 bg-avocado text-white rounded-md font-medium hover:bg-opacity-90 transition"
+      >
+        {data.ctaText}
+      </a>
+    )}
+  </div>
+</section>

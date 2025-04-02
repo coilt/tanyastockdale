@@ -1,0 +1,240 @@
+---
+import { remark } from 'remark';
+import remarkHtml from 'remark-html';
+
+const { page } = Astro.props;
+
+// Extract page data directly from the page object
+const { 
+  slug,
+  title, 
+  eyebrow, 
+  heading,
+  content, 
+  richText,
+  coverImage, 
+  image, 
+  caption 
+} = page;
+
+// Process content as Markdown if it exists
+let htmlContent = '';
+
+try {
+  // First try to use the new content field
+  if (content) {
+    // Process Markdown content to HTML
+    const processedContent = await remark()
+      .use(remarkHtml)
+      .process(content);
+    
+    htmlContent = processedContent.toString();
+  } 
+  // Fall back to richText if content is not available
+  else if (richText) {
+    if (typeof richText === 'string') {
+      // Process as Markdown if it's a string
+      const processedContent = await remark()
+        .use(remarkHtml)
+        .process(richText);
+      
+      htmlContent = processedContent.toString();
+    } else if (Array.isArray(richText)) {
+      // Process as Strapi rich text format
+      htmlContent = richText.map(block => {
+        if (block.type === 'paragraph') {
+          const text = block.children.map((child: { text: any; }) => child.text).join('');
+          return `<p>${text}</p>`;
+        } else if (block.type === 'quote' || block.type === 'blockquote') {
+          const text = block.children.map((child: { text: any; }) => child.text).join('');
+          return `
+            <figure class="mt-10 border-l border-emerald-800 pl-9">
+              <blockquote class="font-semibold text-avocado">
+                <p class="lead-heading mt-6 text-2xl/8 font-serif">
+                  ${text}
+                </p>
+              </blockquote>
+            </figure>
+          `;
+        }
+        return '';
+      }).join('');
+    }
+  }
+} catch (error) {
+  console.error("Error processing content:", error);
+  const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+  htmlContent = `<p>Error processing content: ${errorMessage}</p>`;
+}
+
+// Get image URLs
+const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "https://strapi.substorm.cc";
+const coverImageUrl = coverImage?.url 
+  ? `${STRAPI_URL}${coverImage.url}`
+  : null;
+
+const contentImageUrl = image?.url 
+  ? `${STRAPI_URL}${image.url}`
+  : null;
+---
+
+<div class="bg-white px-6 py-32 lg:px-8">
+  <div class="mx-auto max-w-3xl text-base/7 text-gray-700">
+    {eyebrow && <h3 class="text-base/7 featured font-serif font-semibold">{eyebrow}</h3>}
+    
+    {heading && (
+      <h1 class="font-serif mt-2 text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-avocado">
+        {heading}
+      </h1>
+    )}
+
+    {coverImageUrl && (
+      <figure class="mt-16">
+        <img
+          class="aspect-video rounded-2xl object-cover w-full"
+          src={coverImageUrl}
+          alt={heading || title}
+        />
+        {coverImage?.caption && (
+          <figcaption class="mt-4 flex gap-x-2 text-sm/6 text-gray-500">
+            {coverImage.caption}
+          </figcaption>
+        )}
+      </figure>
+    )}
+
+    <div class="mt-10 max-w-2xl prose prose-emerald prose-lg">
+      {/* Render the processed HTML content */}
+      <div set:html={htmlContent} id="content-container" />
+    </div>
+
+    {contentImageUrl && (
+      <figure class="mt-16">
+        <img
+          class="aspect-video rounded-2xl object-cover"
+          src={contentImageUrl}
+          alt={caption || heading || title}
+        />
+        {caption && (
+          <figcaption class="mt-4 flex gap-x-2 text-sm/6 text-gray-500">
+            {caption}
+          </figcaption>
+        )}
+      </figure>
+    )}
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const contentContainer = document.getElementById('content-container');
+    if (contentContainer) {
+      // Transform h1 headings to match the heading style
+      const h1Elements = contentContainer.querySelectorAll('h1');
+      h1Elements.forEach(h1 => {
+        h1.className = "font-serif mt-2 text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-avocado";
+      });
+      
+      // Transform h3 headings to match the eyebrow style
+      const h3Elements = contentContainer.querySelectorAll('h3');
+      h3Elements.forEach(h3 => {
+        h3.className = "text-base/7 featured font-serif font-semibold";
+      });
+      
+      // Transform blockquotes
+      const blockquotes = contentContainer.querySelectorAll('blockquote');
+      blockquotes.forEach(blockquote => {
+        // Get the content of the blockquote
+        const content = blockquote.innerHTML;
+        
+        // Create the new structure
+        const figure = document.createElement('figure');
+        figure.className = 'mt-10 border-l border-emerald-800 pl-9';
+        
+        const newBlockquote = document.createElement('blockquote');
+        newBlockquote.className = 'font-semibold text-avocado';
+        
+        const paragraph = document.createElement('p');
+        paragraph.className = 'lead-heading mt-6 text-2xl/8 font-serif';
+        paragraph.innerHTML = content;
+        
+        // Assemble the new structure
+        newBlockquote.appendChild(paragraph);
+        figure.appendChild(newBlockquote);
+        
+        // Replace the original blockquote with the new structure
+        if (blockquote.parentNode) {
+          blockquote.parentNode.replaceChild(figure, blockquote);
+        }
+      });
+      
+      // Transform images
+      const images = contentContainer.querySelectorAll('img');
+      let imageCounter = 0;
+      
+      images.forEach(img => {
+        // Create the new structure
+        const figure = document.createElement('figure');
+        figure.className = 'mt-16 invisible';
+        figure.id = `portrait-figure-${imageCounter++}`;
+        
+        // Clone the image and set its classes
+        const newImg = img.cloneNode(true) as HTMLImageElement;
+        newImg.className = 'aspect-video rounded-2xl object-cover';
+        
+        // Create the figcaption
+        const figcaption = document.createElement('figcaption');
+        figcaption.className = 'mt-4 flex gap-x-2 text-sm/6 text-gray-500';
+        
+        // Add the SVG icon
+        figcaption.innerHTML = `
+          <svg
+            class="mt-0.5 size-5 flex-none text-gray-300"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          ${img.alt || "Tanya Stockdale"}
+        `;
+        
+        // Assemble the new structure
+        figure.appendChild(newImg);
+        figure.appendChild(figcaption);
+        
+        // Replace the original image with the new structure
+        if (img.parentNode) {
+          img.parentNode.replaceChild(figure, img);
+        }
+        
+        // Add animation
+        const timeline = gsap.timeline();
+        timeline
+          .set(figure, { visibility: 'visible' })
+          .from(figure, {
+            scrollTrigger: {
+              trigger: figure,
+              start: "top bottom",
+              end: "top center",
+              scrub: true,
+              markers: false,
+            },
+            y: 400,
+            opacity: 0,
+            duration: 1,
+          });
+      });
+    }
+  });
+</script>

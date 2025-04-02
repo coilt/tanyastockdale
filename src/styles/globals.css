@@ -340,4 +340,30 @@ textarea {
 
   
 }
+  
+
  
+
+
+/* Blockquote styles */
+.prose blockquote {
+  /* Reset default styles */
+  margin: 0;
+  padding: 0;
+  border-left: none;
+  font-style: normal;
+  color: inherit;
+}
+
+.prose blockquote p {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+}
+
+ 
+
+/* Border color */
+.border-emerald-800 {
+  border-color: #065f46;
+}
