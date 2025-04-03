@@ -94,13 +94,13 @@ console.log("📝 Prepared testimonial data:", JSON.stringify(testimonialData, n
           quote: homePageContent?.lead?.[0]?.quote || "",
           imageAlt: homePageContent?.lead?.[0]?.imageAlt || "",
           paragraphs:
-            homePageContent?.paragraph?.[0]?.paragraph?.split("\n\n") || [],
-          image: "/images/this-is-fine.jpg", // Fallback since there's no image in the lead data
+      homePageContent?.paragraph?.[0]?.paragraph?.split("\n\n") || [],
+    image: homePageContent?.lead?.[0]?.image?.[0]?.url 
+      ? `${STRAPI_URL}${homePageContent.lead[0].image[0].url}` 
+      : "/images/this-is-fine.jpg",
         }}
       />
-
-    
-
+ 
       {homePageContent?.headings?.map((heading: { text: unknown; alignment: string; }, index: number) => {
         // Find the heading that should appear before testimonials
         // You can identify it by index or by checking the text content
