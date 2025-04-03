@@ -5,7 +5,7 @@ import "../styles/globals.css";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Testimonials from "@/components/Testimonials.astro";
-import Lead2 from "../components/Lead2.astro";
+import Lead from "../components/Lead.astro";
 import { getHomepage } from "../lib/strapi";
 
 console.log(Astro.url);
@@ -89,7 +89,7 @@ console.log("📝 Prepared testimonial data:", JSON.stringify(testimonialData, n
       </div>
     </div>
     <div>
-      <Lead2
+      <Lead
         content={{
           quote: homePageContent?.lead?.[0]?.quote || "",
           imageAlt: homePageContent?.lead?.[0]?.imageAlt || "",

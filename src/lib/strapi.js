@@ -114,14 +114,7 @@ export async function getHomepage() {
     return null;
   }
 }
-
-
-
-
-// Make sure this is at the end of the file
-export { getHomepage };
-
-
+ 
 
  // Add this test function to your strapi.js file
 export async function testStrapiApi() {

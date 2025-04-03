@@ -12,13 +12,13 @@ const { content } = Astro.props;
 const defaultContent = {
   quote: "I'm fine. Really, I am. Just surviving.",
   paragraphs: [
-    "We have been conditioned to believe that being \"busy\" (read: important) and \"productive\" (read: worthy) are the ultimate measures of success. But deep down, many of us feel disconnected from our true selves—rushing through life, only to wonder, at the end, if we ever really lived.",
+    'We have been conditioned to believe that being "busy" (read: important) and "productive" (read: worthy) are the ultimate measures of success. But deep down, many of us feel disconnected from our true selves—rushing through life, only to wonder, at the end, if we ever really lived.',
     "As a mother of two, I've faced some horrific changes that forced me to rediscover my true purpose. It wasn't easy. I had to grow up quickly and navigate through some of life's toughest lessons. So I get it. I've been in that place of feeling lost, unsure of how to move forward.",
     "Now, my life's mission is to help those who feel at a crossroads reconnect with their body, mind, and spirit. I guide you to rediscover your inner light.",
-    "I'm here to help you move through your health challenges and truly thrive—not just survive—creating a life on your terms, full of energy, purpose, and joy."
+    "I'm here to help you move through your health challenges and truly thrive—not just survive—creating a life on your terms, full of energy, purpose, and joy.",
   ],
   image: "/images/this-is-fine.jpg",
-  imageAlt: "This is Fine Meme"
+  imageAlt: "This is Fine Meme",
 };
 
 // Use content from Strapi if available, otherwise use defaults
@@ -63,11 +63,15 @@ const imageAlt = content?.imageAlt || defaultContent.imageAlt;
       </div>
       <div>
         <div class="text-base/7 text-gray-700 lg:max-w-lg">
-          {paragraphs.map((paragraph, index) => (
-            <p class={`mt-6 ${index === paragraphs.length - 1 ? 'pin-end' : ''}`}>
-              {paragraph}
-            </p>
-          ))}
+          {
+            paragraphs.map((paragraph: unknown, index: number) => (
+              <p
+                class={`mt-6 ${index === paragraphs.length - 1 ? "pin-end" : ""}`}
+              >
+                {paragraph}
+              </p>
+            ))
+          }
         </div>
         <hr class="pin-end border-gray-100 mt-24" />
       </div>

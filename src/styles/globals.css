@@ -305,7 +305,7 @@ textarea {
 }
 
 .sliding-underline::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 3px;
@@ -322,28 +322,21 @@ textarea {
 .sliding-underline.active::after {
   display: none;
 }
- 
+
 .menu-item {
   color: #898989;
   font-weight: 600;
 }
 
-
-  .tap-overlay {
+.tap-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 10;
-  cursor: pointer;  
-
-  
+  cursor: pointer;
 }
-  
-
- 
-
 
 /* Blockquote styles */
 .prose blockquote {
@@ -361,18 +354,12 @@ textarea {
   font-style: normal;
 }
 
- 
-
 /* Border color */
 .border-emerald-800 {
   border-color: #065f46;
 }
 
-
 /* Add this to your CSS */
 #content-container p:not(.lead-heading) {
   @apply mt-6 text-xl/8;
 }
-
-
-
