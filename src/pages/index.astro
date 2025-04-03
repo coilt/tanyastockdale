@@ -9,23 +9,74 @@ import Lead2 from "../components/Lead2.astro";
 import { getHomepage } from "../lib/strapi";
 
 console.log(Astro.url);
+console.log("🚀 Index page is loading...");
+console.log(`🔧 Environment: ${import.meta.env.MODE}`);
+console.log(
+  `🌐 STRAPI_URL: ${import.meta.env.PUBLIC_STRAPI_URL || "Not set, using default"}`,
+);
 
 // Fetch the homepage content from Strapi
 let homePageContent = null;
 try {
+  console.log("📲 About to fetch homepage data...");
   homePageContent = await getHomepage();
-  console.log("Homepage content:", homePageContent);
+  console.log(
+    "📄 Homepage content received:",
+    homePageContent ? "Data received" : "No data",
+  );
+  if (homePageContent) {
+    console.log("🔍 Homepage data structure:", Object.keys(homePageContent));
+   
+    // Log the entire homePageContent to see its structure
+    console.log("📋 Full homepage content:", JSON.stringify(homePageContent, null, 2));
+   
+    // Specifically log the testimonials data
+    console.log("🧪 Testimonials data from Strapi:",
+      homePageContent.testimonials ? JSON.stringify(homePageContent.testimonials, null, 2) : "Not found"
+    );
+  } else {
+    console.log("⚠️ No homepage data received from Strapi");
+  }
 } catch (error) {
-  console.error("Error fetching homepage content:", error);
+  console.error("❌ Error fetching homepage content:", error);
 }
 
 // Get the Strapi URL for image paths
-const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || "https://strapi.substorm.cc";
+const STRAPI_URL =
+  import.meta.env.PUBLIC_STRAPI_URL || "https://strapi.substorm.cc";
+console.log(`🖼️ Using Strapi URL for images: ${STRAPI_URL}`);
 
 // Background image from Strapi or fallback
-const backgroundImage = homePageContent?.backgroundImage?.url 
-  ? `${STRAPI_URL}${homePageContent.backgroundImage.url}` 
+const backgroundImage = homePageContent?.backgroundImage?.url
+  ? `${STRAPI_URL}${homePageContent.backgroundImage.url}`
   : "/images/index-bg-3-opt.jpg";
+console.log(`🖼️ Background image path: ${backgroundImage}`);
+
+// Prepare testimonials data correctly based on the actual structure
+const testimonialData = {
+  testimonials: homePageContent?.testimonials
+    ? homePageContent.testimonials.map((testimonial: any) => ({
+        title: testimonial.title || "No title",
+        // Split the content by paragraphs if it's a string
+        content: testimonial.content ? testimonial.content.split("\n\n") : [],
+        author: testimonial.author || "Anonymous",
+        photo: testimonial.photo?.url
+          ? `${STRAPI_URL}${testimonial.photo.url}`
+          : "/images/tallulah.jpg", // Fallback image
+      }))
+    : [
+        {
+          title: "FALLBACK",
+          content: [
+            "FALLBACK",
+          ],
+          author: "FALLBACK",
+          photo: "images/index-bg-3-opt.jpg",
+        },
+      ]
+};
+
+console.log("📝 Prepared testimonial data:", JSON.stringify(testimonialData, null, 2));
 ---
 
 <Layout title="Tanya Stockdale's homepage">
@@ -34,30 +85,67 @@ const backgroundImage = homePageContent?.backgroundImage?.url
   >
     <div class="wrapper-div flex flex-col justify-between">
       <div class="hero w-4/6 max-w-[840px] min-w-[300px] mx-auto bg-opacity-0">
-        <Hero content={homePageContent?.Hero} />
+        <Hero content={homePageContent?.hero} />
       </div>
     </div>
     <div>
-      <Lead2 content={{
-        quote: homePageContent?.Lead?.quote,
-        imageAlt: homePageContent?.Lead?.imageAlt,
-        paragraphs: homePageContent?.paragraphs?.[0]?.Paragraph.split('\n\n') || [],
-        image: homePageContent?.Lead?.image?.url ? `${STRAPI_URL}${homePageContent.Lead.image.url}` : "/images/this-is-fine.jpg"
-      }} />
-      <Testimonials content={{
-        heading: homePageContent?.heading,
-        testimonials: [
-          {
-            title: homePageContent?.Card?.title,
-            content: homePageContent?.Card?.paragraph.split('\n\n') || [],
-            author: homePageContent?.Card?.author,
-            image: homePageContent?.Card?.image?.url ? `${STRAPI_URL}${homePageContent.Card.image.url}` : "/images/tallulah.jpg"
-          }
-        ]
-      }} />
+      <Lead2
+        content={{
+          quote: homePageContent?.lead?.[0]?.quote || "",
+          imageAlt: homePageContent?.lead?.[0]?.imageAlt || "",
+          paragraphs:
+            homePageContent?.paragraph?.[0]?.paragraph?.split("\n\n") || [],
+          image: "/images/this-is-fine.jpg", // Fallback since there's no image in the lead data
+        }}
+      />
+
+    
+
+      {homePageContent?.headings?.map((heading: { text: unknown; alignment: string; }, index: number) => {
+        // Find the heading that should appear before testimonials
+        // You can identify it by index or by checking the text content
+        if (index === 1 || (typeof heading.text === 'string' && (heading.text.toLowerCase().includes('client') || heading.text.toLowerCase().includes('testimonial')))) {
+          return (
+            <div class="mx-auto max-w-6xl px-6 lg:px-8">
+              <div class="mx-auto max-w-2xl text-center">
+                <h2 class={`mt-2 text-4xl font-serif tracking-tight text-balance text-avocado sm:text-5xl ${
+                  heading.alignment === 'left' ? 'text-left' : 
+                  heading.alignment === 'right' ? 'text-right' : 
+                  'text-center'
+                }`}>
+                  {heading.text}
+                </h2>
+              </div>
+            </div>
+          );
+        }
+        return null;
+      })}
+      
+      <!-- If no matching heading is found, use the fallback -->
+      {!homePageContent?.headings?.some((h: { text: string; }) => 
+        h.text.toLowerCase().includes('client') || 
+        h.text.toLowerCase().includes('testimonial')
+      ) && (
+        <div class="mx-auto max-w-6xl px-6 lg:px-8">
+          <div class="mx-auto max-w-2xl text-center">
+            <h2 class="mt-2 text-4xl font-serif tracking-tight text-balance text-avocado sm:text-5xl">
+              Here's what my clients say
+            </h2>
+          </div>
+        </div>
+      )}
+       
+
+      <!-- Pass the updated testimonial data -->
+      <Testimonials content={testimonialData} />
     </div>
   </div>
 </Layout>
+
+<script>
+  console.log("📃 Index page client-side script running");
+</script>
 
 <style define:vars={{ backgroundImage: `url("${backgroundImage}")` }}>
   .bg {

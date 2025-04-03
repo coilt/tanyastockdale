@@ -26,11 +26,11 @@ console.log(Astro.url);
           me mid-step.
         </p>
 
-        <figure class="mt-16 invisible" id="portrait-figure">
+        <figure class="mt-16 invisible" id="photo-figure">
           <img
             class="aspect-video rounded-2xl object-cover"
             src="/images/photo_2024-01-13_21-12-49.jpg"
-            alt="Tanya Stockdale's portrait"
+            alt="Tanya Stockdale's photo"
           />
           <figcaption class="mt-4 flex gap-x-2 text-sm/6 text-gray-500">
             <svg
@@ -169,14 +169,14 @@ console.log(Astro.url);
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const portraitFigure = document.querySelector('#portrait-figure');
+  const photoFigure = document.querySelector('#photo-figure');
   const timeline = gsap.timeline();
 
   timeline
-  .set(portraitFigure, { visibility: 'visible' })
-  .from("#portrait-figure", {
+  .set(photoFigure, { visibility: 'visible' })
+  .from("#photo-figure", {
     scrollTrigger: {
-      trigger: "#portrait-figure",
+      trigger: "#photo-figure",
       start: "top bottom",
       end: "top center",
       scrub: true,
