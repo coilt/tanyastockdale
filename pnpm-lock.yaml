@@ -71,9 +71,6 @@ importers:
       '@vueuse/motion':
         specifier: ^2.2.6
         version: 2.2.6(magicast@0.3.5)(rollup@4.38.0)(vue@3.5.13(typescript@5.7.2))
-      aos:
-        specifier: ^2.3.4
-        version: 2.3.4
       astro:
         specifier: ^5.5.6
         version: 5.5.6(@types/node@22.10.2)(jiti@2.4.1)(rollup@4.38.0)(sass-embedded@1.83.0)(typescript@5.7.2)(yaml@2.6.1)
@@ -1292,9 +1289,6 @@ packages:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
 
-  aos@2.3.4:
-    resolution: {integrity: sha512-zh/ahtR2yME4I51z8IttIt4lC1Nw0ktsFtmeDzID1m9naJnWXhCoARaCgNOGXb5CLy3zm+wqmRAEgMYB5E2HUw==}
-
   arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
 
@@ -1472,9 +1466,6 @@ packages:
 
   class-variance-authority@0.7.1:
     resolution: {integrity: sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg==}
-
-  classlist-polyfill@1.2.0:
-    resolution: {integrity: sha512-GzIjNdcEtH4ieA2S8NmrSxv7DfEV5fmixQeyTmqmRmRJPGpRBaSnA2a0VrCjyT8iW8JjEdMbKzDotAJf+ajgaQ==}
 
   cli-boxes@3.0.0:
     resolution: {integrity: sha512-/lzGpEWL/8PfI0BmBOPRwp0c/wFNX1RdUML3jK/RcSBA9T8mZDdQpqYBKtCFTOfQbwPqWEOpjqW+Fnayc0969g==}
@@ -2136,12 +2127,6 @@ packages:
   local-pkg@0.5.1:
     resolution: {integrity: sha512-9rrA30MRRP3gBD3HTGnC6cDFpaE1kVDWxWgqWJUN0RvDNAo+Nz/9GxB+nHOH0ifbVFy0hSA1V6vFDvnx54lTEQ==}
     engines: {node: '>=14'}
-
-  lodash.debounce@4.0.8:
-    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
-
-  lodash.throttle@4.1.1:
-    resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
@@ -5019,12 +5004,6 @@ snapshots:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  aos@2.3.4:
-    dependencies:
-      classlist-polyfill: 1.2.0
-      lodash.debounce: 4.0.8
-      lodash.throttle: 4.1.1
-
   arg@5.0.2: {}
 
   argparse@2.0.1: {}
@@ -5301,8 +5280,6 @@ snapshots:
   class-variance-authority@0.7.1:
     dependencies:
       clsx: 2.1.1
-
-  classlist-polyfill@1.2.0: {}
 
   cli-boxes@3.0.0: {}
 
@@ -5975,10 +5952,6 @@ snapshots:
       mlly: 1.7.3
       pkg-types: 1.2.1
     optional: true
-
-  lodash.debounce@4.0.8: {}
-
-  lodash.throttle@4.1.1: {}
 
   lodash@4.17.21: {}
 

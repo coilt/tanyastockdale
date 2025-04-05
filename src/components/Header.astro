@@ -7,17 +7,13 @@ let navItems = [];
 let allPages = [];
 
 try {
-  // Try to get navigation items from Strapi
   navItems = await getNavigation();
   
-  // Also fetch all pages
   allPages = await getPages();
-  console.log("All pages:", allPages);
 } catch (error) {
   console.error("Error fetching data:", error);
 }
 
-// Format pages based on their actual structure
 const formattedPages = allPages.map(page => {
   let slug = "";
   let title = "Untitled";
@@ -26,7 +22,6 @@ const formattedPages = allPages.map(page => {
     slug = page.slug;
     title = page.title || "Untitled";
     
-    // Map "index" or "home" slug to empty string (root URL)
     if (slug === "index" || slug === "home" || slug === "") {
       slug = "";
     }
@@ -40,7 +35,6 @@ const formattedPages = allPages.map(page => {
   };
 });
 
-// Fallback to static navigation if both Strapi calls fail
 const staticNavPaths = ["", "about", "contact"];
 const displayNavItems = formattedPages.length > 0
   ? formattedPages
@@ -51,8 +45,7 @@ const displayNavItems = formattedPages.length > 0
       }
     }));
 
-// Function to convert text to Sentence case
-function toSentenceCase(text) {
+function toSentenceCase(text: string) {
   if (!text || typeof text !== 'string') return '';
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 }
@@ -71,7 +64,6 @@ function toSentenceCase(text) {
       <ul class="flex gap-x-8 rounded-full bg-avocado bg-opacity-0 px-8 py-2">
         {
           displayNavItems.map((item) => {
-            // Safely access properties
             const attributes = item.attributes || {};
             const path = attributes.slug || "";
             const title = attributes.title || "Untitled";

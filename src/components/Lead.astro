@@ -2,13 +2,10 @@
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/quicksand";
 import "../styles/globals.css";
-import "aos/dist/aos.css";
 import "../styles/components.css";
 
-// Accept content from props
 const { content } = Astro.props;
 
-// Default content if nothing is provided from Strapi
 const defaultContent = {
   quote: "I'm fine. Really, I am. Just surviving.",
   paragraphs: [
@@ -21,7 +18,6 @@ const defaultContent = {
   imageAlt: "This is Fine Meme",
 };
 
-// Use content from Strapi if available, otherwise use defaults
 const quote = content?.quote || defaultContent.quote;
 const paragraphs = content?.paragraphs || defaultContent.paragraphs;
 const image = content?.image || defaultContent.image;

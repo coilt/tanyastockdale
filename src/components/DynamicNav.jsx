@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { footerLinks } from "./Nav/data";
 import { slideIn } from "./Nav/anim";
 
-// Function to convert text to Sentence case
+// Convert text to Sentence case
 function toSentenceCase(text) {
   if (!text || typeof text !== 'string') return '';
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
@@ -19,6 +19,7 @@ export default function DynamicNav() {
   ]);
 
   useEffect(() => {
+
     // Fetch pages from the server
     async function fetchPages() {
       try {
@@ -36,12 +37,11 @@ export default function DynamicNav() {
             href: `/${page.slug || ""}`
           }));
           
-          // Create a new array with Home (if needed) and Blog
+          // Create a new array with Home and Blog
           const newLinks = [
-            // Include Home if not already in the dynamic links
             ...(!dynamicLinks.some(link => link.href === "/") ? [{ title: "Home", href: "/" }] : []),
             ...dynamicLinks,
-            // Always include Blog
+            // Always include Blog regardless of dynamic links
             { title: "Blog", href: "/blog" }
           ];
           
@@ -49,7 +49,7 @@ export default function DynamicNav() {
         }
       } catch (error) {
         console.error("Error fetching pages:", error);
-        // Keep using the default links if there's an error
+        // Default links fallback
       }
     }
     
