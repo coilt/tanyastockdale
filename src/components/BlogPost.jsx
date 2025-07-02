@@ -1,6 +1,7 @@
 import React from "react";
 import { parse } from "node-html-parser";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 const Paragraph = ({ children }) => (
   <p className="mb-8 text-base/7 text-gray-700">{children}</p>
@@ -61,46 +62,51 @@ const Image = ({ src, alt, caption }) => (
 
 const BlogPost = ({ post }) => {
   const renderContent = (content) => {
+    if (!content) return [];
+    
     const root = parse(content);
-    return root.childNodes.map((node, index) => {
-      switch (node.tagName) {
-        case "P":
-          return <Paragraph key={index}>{node.textContent}</Paragraph>;
-        case "H1":
-          return <Heading1 key={index}>{node.textContent}</Heading1>;
-        case "H2":
-          return <Heading2 key={index}>{node.textContent}</Heading2>;
-        case "H3":
-          return <Heading3 key={index}>{node.textContent}</Heading3>;
+    return root.childNodes
+      .map((node, index) => {
+        if (!node.tagName) return null;
         
+        switch (node.tagName) {
+          case "P":
+            return <Paragraph key={index}>{node.textContent}</Paragraph>;
+          case "H1":
+            return <Heading1 key={index}>{node.textContent}</Heading1>;
+          case "H2":
+            return <Heading2 key={index}>{node.textContent}</Heading2>;
+          case "H3":
+            return <Heading3 key={index}>{node.textContent}</Heading3>;
           case "BLOCKQUOTE":
-        return <Blockquote key={index}>{node.textContent}</Blockquote>;
-        
-
-case "FIGURE":
-  if (node.classList.contains("kg-image-card")) {
-    const img = node.querySelector("img");
-    const captionSpan = node.querySelector("figcaption span");
-    const caption = captionSpan ? captionSpan.textContent.trim() : "";
-    return (
-      <Image
-        key={index}
-        src={img.getAttribute("src")}
-        alt={img.getAttribute("alt")}
-        caption={caption}
-      />
-    );
-  }
-  return null;
-
-
-        case "UL":
-          const items = node.querySelectorAll("li").map((li) => li.textContent);
-          return <List key={index} items={items} />;
-        default:
-          return null;
-      }
-    });
+            return <Blockquote key={index}>{node.textContent}</Blockquote>;
+          case "FIGURE":
+            if (node.classList && node.classList.contains("kg-image-card")) {
+              const img = node.querySelector("img");
+              if (!img) return null;
+              
+              const captionSpan = node.querySelector("figcaption span");
+              const caption = captionSpan ? captionSpan.textContent.trim() : "";
+              return (
+                <Image
+                  key={index}
+                  src={img.getAttribute("src")}
+                  alt={img.getAttribute("alt") || ""}
+                  caption={caption}
+                />
+              );
+            }
+            return null;
+          case "UL":
+            const listItems = node.querySelectorAll("li");
+            if (!listItems.length) return null;
+            const items = Array.from(listItems).map((li) => li.textContent);
+            return <List key={index} items={items} />;
+          default:
+            return null;
+        }
+      })
+      .filter(Boolean);
   };
 
   return (
