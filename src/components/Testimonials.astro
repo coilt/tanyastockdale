@@ -6,7 +6,7 @@ import "@fontsource/quicksand";
 const { content } = Astro.props;
 
 // Log what we received
-console.log("🔍 testimonials component received:", content);
+console.log("Testimonials component received:", content);
 
 // Default content if nothing is provided from Strapi
 const defaultContent = {
@@ -22,15 +22,12 @@ const defaultContent = {
   ],
 };
 
-// Use content from Strapi if available, otherwise use defaults
+// Use content from Strapi if available, otherwise use fallback
 const testimonials = content?.testimonials || defaultContent.testimonials;
 
-console.log("📝 testimonials to render:", testimonials);
-
-// Function to chunk testimonials into groups of 2 for layout
+// Chunk testimonials into groups of 2 for layout
 function chunkArray(array: string | any[], size: number) {
   if (!Array.isArray(array)) {
-    console.error("❌ chunkArray received non-array:", array);
     return [];
   }
   
@@ -42,13 +39,14 @@ function chunkArray(array: string | any[], size: number) {
 }
 
 const testimonialGroups = chunkArray(testimonials, 2);
-console.log(`📊 Created ${testimonialGroups.length} testimonial groups`);
+
 ---
 
 <div class="bg-white py-24 sm:py-32 overflow-x-clip">
   <div class="mx-auto max-w-6xl flex">
     <div class="mx-auto max-w-6xl px-6 lg:px-8">
-      <!-- Add back the SVG blurred blobs -->
+
+      <!-- SVG blurred blobs -->
       <div class="relative w-full max-w-lg flex -z-100">
         <div
           class="absolute top-40 -left-1/4 w-1/2 h-1/3 mix-blend-multiply filter blur-2xl opacity-20"

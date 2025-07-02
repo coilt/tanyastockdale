@@ -3,16 +3,13 @@ import "@fontsource/playfair-display";
 import "../styles/globals.css";
 import "../styles/components.css";
 
-// Accept content from props
 const { content } = Astro.props;
 
-// Default content if nothing is provided from Strapi
 const defaultContent = {
   title: "Discover Proactive Wellness with Functional Medicine",
   subtitle: "Functional Medicine for Mind, Body, and Soul"
 };
 
-// Use content from Strapi if available, otherwise use defaults
 const title = content?.title || defaultContent.title;
 const subtitle = content?.subtitle || defaultContent.subtitle;
 ---
@@ -34,7 +31,7 @@ const subtitle = content?.subtitle || defaultContent.subtitle;
   import gsap from "gsap";
   import Splitting from "splitting";
 
-  Splitting(); // Initialize splitting
+  Splitting(); 
 
   const heroTitle = document.querySelector('.hero-title');
   const timeline = gsap.timeline();

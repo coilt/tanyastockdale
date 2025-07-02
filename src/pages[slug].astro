@@ -3,18 +3,13 @@ import Layout from "@/layouts/Layout.astro";
 import DynamicPage from "@/components/DynamicPage.astro";
 import { getPageBySlug } from "@/lib/strapi";
 
-// Get the slug from the URL
 const { slug } = Astro.params;
-
-// Fetch the page data from Strapi
 const page = await getPageBySlug(slug);
 
-// If page not found, return 404
 if (!page) {
   return Astro.redirect('/404');
 }
 
-// Extract page metadata for SEO
 const pageTitle = page.heading || page.title || "Page";
 ---
 
