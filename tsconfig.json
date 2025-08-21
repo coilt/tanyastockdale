@@ -7,20 +7,15 @@
     "src/**/*",
     "src/types/*",
     "src/**/*.ts",
-     "src/**/*.d.ts",
-     "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.ts",
     "src/**/*.d.ts",
     "src/types/**/*.ts",
     "src/types/**/*.d.ts"
-
   ],
-  "exclude": [
-    "dist"
-  ],
+  "exclude": ["dist"],
   "compilerOptions": {
-    "types": [
-      "astro/client"
-    ],
+    "types": ["astro/client"],
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
@@ -29,17 +24,12 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "typeRoots": [
-        "./node_modules/@types",
-        "./src/types"
-      ]
+      "@/*": ["src/*"],
+      "@/lib/*": ["src/lib/*"],
+
+      "typeRoots": ["./node_modules/@types", "./src/types"]
     },
     "jsxImportSource": "react"
   },
-  "files": [
-    "node_modules/gsap/types/index.d.ts"
-  ]
+  "files": ["node_modules/gsap/types/index.d.ts"]
 }

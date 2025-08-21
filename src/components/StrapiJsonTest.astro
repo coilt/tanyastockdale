@@ -1,0 +1,24 @@
+---
+// A minimal Astro component to fetch and render JSON from Strapi homepage endpoint
+let data = null;
+let error = null;
+try {
+  const res = await fetch('https://strapi.substorm.cc/api/homepage?populate[testimonials][populate]=photo');
+  if (!res.ok) {
+    error = `HTTP ${res.status}`;
+  } else {
+    data = await res.json();
+  }
+} catch (e) {
+  error = e instanceof Error ? e.message : String(e);
+}
+---
+
+<div style="padding:2rem; background:#f9f9f9;">
+  <h2>Strapi Homepage JSON Test</h2>
+  {error && <pre style="color:red;">Error: {error}</pre>}
+  {data
+    ? <pre style="max-width:100vw; overflow-x:auto; background:#222; color:#fff; padding:1rem;">{JSON.stringify(data, null, 2)}</pre>
+    : !error && <p>Loading...</p>
+  }
+</div>

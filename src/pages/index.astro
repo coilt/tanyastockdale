@@ -7,6 +7,7 @@ import Hero from "../components/Hero.astro";
 import Testimonials from "@/components/Testimonials.astro";
 import Lead from "../components/Lead.astro";
 import { getHomepage } from "../lib/strapi";
+import StrapiJsonTest from "../components/StrapiJsonTest.astro"
 
 console.log(Astro.url);
 console.log("🚀 Index page is loading...");
@@ -26,13 +27,19 @@ try {
   );
   if (homePageContent) {
     console.log("🔍 Homepage data structure:", Object.keys(homePageContent));
-   
+
     // Log the entire homePageContent to see its structure
-    console.log("📋 Full homepage content:", JSON.stringify(homePageContent, null, 2));
-   
+    console.log(
+      "📋 Full homepage content:",
+      JSON.stringify(homePageContent, null, 2),
+    );
+
     // Specifically log the testimonials data
-    console.log("🧪 Testimonials data from Strapi:",
-      homePageContent.testimonials ? JSON.stringify(homePageContent.testimonials, null, 2) : "Not found"
+    console.log(
+      "🧪 Testimonials data from Strapi:",
+      homePageContent.testimonials
+        ? JSON.stringify(homePageContent.testimonials, null, 2)
+        : "Not found",
     );
   } else {
     console.log("⚠️ No homepage data received from Strapi");
@@ -41,42 +48,68 @@ try {
   console.error("❌ Error fetching homepage content:", error);
 }
 
+console.log("FULL HOMEPAGE CONTENT:", JSON.stringify(homePageContent, null, 2));
+
+console.log(
+  "TESTIMONIALS RAW:",
+  JSON.stringify(homePageContent?.testimonials, null, 2),
+);
+
 // Get the Strapi URL for image paths
 const STRAPI_URL =
   import.meta.env.PUBLIC_STRAPI_URL || "https://strapi.substorm.cc";
 console.log(`🖼️ Using Strapi URL for images: ${STRAPI_URL}`);
 
 // Background image from Strapi or fallback
-const backgroundImage = homePageContent?.backgroundImage?.url
-  ? `${STRAPI_URL}${homePageContent.backgroundImage.url}`
+const backgroundImage = homePageContent?.backgroundimage?.url
+  ? `${STRAPI_URL}${homePageContent.backgroundimage.url}`
   : "/images/index-bg-3-opt.jpg";
 console.log(`🖼️ Background image path: ${backgroundImage}`);
 
-// Prepare testimonials data correctly based on the actual structure
+// Robustly extract testimonials array from homepage content
+let testimonialsArr: any[] = [];
+if (Array.isArray(homePageContent?.testimonials)) {
+  testimonialsArr = homePageContent.testimonials;
+} else if (Array.isArray(homePageContent?.testimonials?.data)) {
+  testimonialsArr = homePageContent.testimonials.data;
+}
+
+console.log(
+  "✅ Extracted testimonials array:",
+  JSON.stringify(testimonialsArr, null, 2),
+);
+
+console.log("TESTIMONIALS ARRAY:", JSON.stringify(testimonialsArr, null, 2));
+
 const testimonialData = {
-  testimonials: homePageContent?.testimonials
-    ? homePageContent.testimonials.map((testimonial: any) => ({
-        title: testimonial.title || "No title",
-        // Split the content by paragraphs if it's a string
-        content: testimonial.content ? testimonial.content.split("\n\n") : [],
-        author: testimonial.author || "Anonymous",
-        photo: testimonial.photo?.url
-          ? `${STRAPI_URL}${testimonial.photo.url}`
-          : "/images/tallulah.jpg", // Fallback image
-      }))
+  testimonials: testimonialsArr.length
+    ? testimonialsArr.map((testimonial: any) => {
+        // Support both flat and Strapi v4 .attributes structure
+        const t = testimonial.attributes || testimonial;
+        return {
+          title: t.title || "No title",
+          content: t.content ? t.content.split("\n\n") : [],
+          author: t.author || "Anonymous",
+          photo: t.photo?.url
+            ? `${STRAPI_URL}${t.photo.url}`
+            : t.photo?.data?.attributes?.url
+              ? `${STRAPI_URL}${t.photo.data.attributes.url}`
+              : "/images/tallulah.jpg",
+        };
+      })
     : [
         {
           title: "FALLBACK",
-          content: [
-            "FALLBACK",
-          ],
+          content: ["FALLBACK"],
           author: "FALLBACK",
           photo: "images/index-bg-3-opt.jpg",
         },
-      ]
+      ],
 };
-
-console.log("📝 Prepared testimonial data:", JSON.stringify(testimonialData, null, 2));
+console.log(
+  "📝 Prepared testimonial data:",
+  JSON.stringify(testimonialData, null, 2),
+);
 ---
 
 <Layout title="Tanya Stockdale's homepage">
@@ -91,51 +124,30 @@ console.log("📝 Prepared testimonial data:", JSON.stringify(testimonialData, n
     <div>
       <Lead
         content={{
-          quote: homePageContent?.lead?.[0]?.quote || "",
-          imageAlt: homePageContent?.lead?.[0]?.imageAlt || "",
-          paragraphs:
-      homePageContent?.paragraph?.[0]?.paragraph?.split("\n\n") || [],
-    image: homePageContent?.lead?.[0]?.image?.[0]?.url 
-      ? `${STRAPI_URL}${homePageContent.lead[0].image[0].url}` 
-      : "/images/this-is-fine.jpg",
+          quote: homePageContent?.lead?.data?.attributes?.quote || "",
+          imageAlt: homePageContent?.lead?.data?.attributes?.imagealt || "",
+          paragraphs: Array.isArray(homePageContent?.paragraphs?.data)
+            ? homePageContent.paragraphs.data.map(
+                (p: any) => p.attributes?.paragraph || "",
+              )
+            : [],
+          image: homePageContent?.lead?.data?.attributes?.image?.data
+            ?.attributes?.url
+            ? `${STRAPI_URL}${homePageContent.lead.data.attributes.image.data.attributes.url}`
+            : "/images/this-is-fine.jpg",
         }}
       />
- 
-      {homePageContent?.headings?.map((heading: { text: unknown; alignment: string; }, index: number) => {
-        // Find the heading that should appear before testimonials
-        // You can identify it by index or by checking the text content
-        if (index === 1 || (typeof heading.text === 'string' && (heading.text.toLowerCase().includes('client') || heading.text.toLowerCase().includes('testimonial')))) {
-          return (
-            <div class="mx-auto max-w-6xl px-6 lg:px-8">
-              <div class="mx-auto max-w-2xl text-center">
-                <h2 class={`mt-2 text-4xl font-serif tracking-tight text-balance text-avocado sm:text-5xl ${
-                  heading.alignment === 'left' ? 'text-left' : 
-                  heading.alignment === 'right' ? 'text-right' : 
-                  'text-center'
-                }`}>
-                  {heading.text}
-                </h2>
-              </div>
-            </div>
-          );
-        }
-        return null;
-      })}
-      
-      <!-- If no matching heading is found, use the fallback -->
-      {!homePageContent?.headings?.some((h: { text: string; }) => 
-        h.text.toLowerCase().includes('client') || 
-        h.text.toLowerCase().includes('testimonial')
-      ) && (
-        <div class="mx-auto max-w-6xl px-6 lg:px-8">
-          <div class="mx-auto max-w-2xl text-center">
-            <h2 class="mt-2 text-4xl font-serif tracking-tight text-balance text-avocado sm:text-5xl">
-              Here's what my clients say
-            </h2>
-          </div>
+
+      {/* Static heading for testimonials section */}
+      <div class="mx-auto max-w-6xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2
+            class="mt-2 text-4xl font-serif tracking-tight text-balance text-avocado sm:text-5xl"
+          >
+            Here's what my clients say
+          </h2>
         </div>
-      )}
-       
+      </div>
 
       <!-- Pass the updated testimonial data -->
       <Testimonials content={testimonialData} />

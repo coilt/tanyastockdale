@@ -1,36 +1,28 @@
 ---
-import "@fontsource/playfair-display/700.css";
-import "@fontsource/quicksand";
 
-// Accept content from props
-const { content } = Astro.props;
-
-// Log what we received
-console.log("Testimonials component received:", content);
-
-// Default content if nothing is provided from Strapi
-const defaultContent = {
-  testimonials: [
-    {
-      title: "Fallback Title",
-      content: [
-        "FALLBACK TESTIMONIAL" 
-      ],
-      author: "Tallulah Adey",
-      photo: "/images/tallulah.jpg",
-    },
-  ],
-};
-
-// Use content from Strapi if available, otherwise use fallback
-const testimonials = content?.testimonials || defaultContent.testimonials;
-
-// Chunk testimonials into groups of 2 for layout
-function chunkArray(array: string | any[], size: number) {
-  if (!Array.isArray(array)) {
-    return [];
+// Server-side fetch testimonials from Strapi
+let testimonials: any[] = [];
+let error: string | null = null;
+try {
+  const res = await fetch('https://strapi.substorm.cc/api/homepage?populate[testimonials][populate]=photo');
+  if (!res.ok) {
+    error = `HTTP ${res.status}`;
+  } else {
+    const data = await res.json();
+    // Extract testimonials array from Strapi response
+    const raw = data?.data?.testimonials;
+    if (Array.isArray(raw)) {
+      testimonials = raw;
+    } else if (raw?.data && Array.isArray(raw.data)) {
+      testimonials = raw.data;
+    }
   }
-  
+} catch (e) {
+  error = e instanceof Error ? e.message : String(e);
+}
+
+function chunkArray(array: any[], size: number) {
+  if (!Array.isArray(array)) return [];
   const chunked = [];
   for (let i = 0; i < array.length; i += size) {
     chunked.push(array.slice(i, i + size));
@@ -95,21 +87,28 @@ const testimonialGroups = chunkArray(testimonials, 2);
                       <figure class="rounded-2xl bg-white p-6 shadow-lg ring-gray-900/5 isolate mb-12">
                         <h3 class="featured">{testimonial.title}</h3>
                         <blockquote class="text-gray-900">
-                          {Array.isArray(testimonial.content) ? (
-                            testimonial.content.map((paragraph: unknown, pIndex: number) => (
-                              <p class={pIndex > 0 ? "mt-8" : ""}>
-                                {paragraph}
-                              </p>
-                            ))
-                          ) : (
-                            <p>{testimonial.content || "No content available"}</p>
-                          )}
+                          {Array.isArray(testimonial.content)
+                            ? testimonial.content.map((paragraph: unknown, pIndex: number) => (
+                                <p class={pIndex > 0 ? "mt-8" : ""}>{paragraph}</p>
+                              ))
+                            : typeof testimonial.content === 'string' && testimonial.content
+                              ? testimonial.content.split(/\n{1,2}/).map((paragraph: string, pIndex: number) => (
+                                  <p class={pIndex > 0 ? "mt-8" : ""}>{paragraph}</p>
+                                ))
+                              : <p>No content available</p>
+                          }
                         </blockquote>
                         <figcaption class="mt-6 flex items-center gap-x-4">
                           <img
                             class="size-10 rounded-full bg-gray-50"
-                            src={testimonial.photo}
-                            alt={`${testimonial.author} testimonial photo`}
+                            src={
+                              testimonial.photo?.url
+                                ? `https://strapi.substorm.cc${testimonial.photo.url}`
+                                : testimonial.photo?.data?.attributes?.url
+                                  ? `https://strapi.substorm.cc${testimonial.photo.data.attributes.url}`
+                                  : "/images/tallulah.jpg"
+                            }
+                            alt={`${testimonial.author || testimonial.attributes?.author || ""} testimonial photo`}
                           />
                           <div>
                             <div class="font-semibold">
